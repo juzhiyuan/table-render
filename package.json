@@ -1,5 +1,5 @@
 {
-  "name": "@ali/table-render",
+  "name": "table-render",
   "version": "0.1.2",
   "description": "协议驱动search-table生成器",
   "scripts": {
