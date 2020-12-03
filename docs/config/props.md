@@ -16,7 +16,7 @@ table-render 的 api 视觉上如图
 ## 基本使用
 
 ```js
-import { TableContainer, ProTable, Search } from '@ali/table-render';
+import { TableContainer, ProTable, Search } from 'table-render';
 
 ...
 return (
@@ -159,7 +159,7 @@ columns 为 antd 已有的 props，所以支持 antd 所有的支持的 [columns
 如果我需要刷新页面，该哪里去取刷新的 api？
 
 ```js
-import { useTable } from '@ali/table-render';
+import { useTable } from 'table-render';
 
 // 在任何组件内，哪怕不是一个文件也没事，因为 useTable 实质上是 React 的 Context
 const Customized = () => {

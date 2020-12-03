@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { ProTable, Search, TableContainer, useTable } from '@ali/table-render';
+import { ProTable, Search, TableContainer, useTable } from 'table-render';
 import { Tag, Space, Menu, Dropdown, message, Button, Tooltip } from 'antd';
 import {
   PlusOutlined,

@@ -11,12 +11,12 @@ export default defineConfig({
     null,
     {
       title: 'GitHub',
-      path: 'http://gitlab.alibaba-inc.com/one-sdk/table-render',
+      path: 'https://github.com/form-render/table-render',
     },
     {
       title: '更新日志',
       path:
-        'http://gitlab.alibaba-inc.com/one-sdk/table-render/blob/master/CHANGELOG.md',
+        'https://github.com/form-render/table-render/blob/master/CHANGELOG.md',
     },
   ],
   mode: 'site',

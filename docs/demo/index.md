@@ -28,7 +28,7 @@ toc: menu
 基本上写一个 table-render，你需要
 
 ```js
-import { ProTable, Search, TableContainer, useTable } from '@ali/table-render';
+import { ProTable, Search, TableContainer, useTable } from 'table-render';
 ```
 
 render 里
