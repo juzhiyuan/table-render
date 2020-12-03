@@ -20,8 +20,8 @@ export default defineConfig({
     },
   ],
   mode: 'site',
-  base: '/one-sdk/table-render/',
-  publicPath: '/one-sdk/table-render/',
+  base: '/table-render/',
+  publicPath: '/table-render/',
   exportStatic: {},
   // more config: https://d.umijs.org/config
 });
