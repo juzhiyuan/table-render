@@ -1,7 +1,7 @@
 ---
 hero:
   title: table-render
-  desc: 中后台表单解决方案
+  desc: 中后台表格解决方案
   actions:
     - text: Getting Started
       link: /guide
