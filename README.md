@@ -2,7 +2,8 @@
 
 ## 简介
 
-1. [更新日志](https://github.com/form-render/table-render/blob/master/CHANGELOG.md)
+1. [文档地址](https://form-render.github.io/table-render/)
+2. [更新日志](https://github.com/form-render/table-render/blob/master/CHANGELOG.md)
 
 ## 使用方法
 
