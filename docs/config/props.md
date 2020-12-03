@@ -1,0 +1,215 @@
+---
+order: 1
+title: Props
+nav:
+  order: 2
+  title: 配置项
+toc: menu
+---
+
+# Props
+
+table-render 的 api 视觉上如图
+
+<img src="https://img.alicdn.com/tfs/TB101OZm9slXu8jSZFuXXXg7FXa-1608-1156.png" width="600px" />
+
+## 基本使用
+
+```js
+import { TableContainer, ProTable, Search } from '@ali/table-render';
+
+...
+return (
+  <TableContainer searchApi={searchApi}>
+    <Search {...searchSchema} />
+    <ProTable
+      headerTitle="高级表单"
+      toolbarRender={() => [
+        <Button key="1">查看日志</Button>,
+        <Button key="2">导出数据</Button>,
+        <Button key="3">创建</Button>,
+      ]}
+      // 下面全是antd的props
+      columns={columns}
+    />
+  </TableContainer>
+);
+```
+
+## `<TableContainer>` 常用 Props
+
+### searchApi
+
+- 类型：`function` or `array`
+- 默认值：无
+- 必填：Yes
+- 详细：
+
+代表点击搜索执行的函数
+
+1. 入参：搜索项和页码信息（current 现在第几页, pageSize 一页多少条），在例子中打开 console 看更有实感。
+2. **注意：** searchApi 的返回值可以是一个对象（用于简单 mock），但一般情况下是一个 Promise，并 resolve 一个对象，**对象的格式必须如下**：
+
+```js
+{
+  rows: [ ... ], // 返回的列表数据，必须有！
+  total: 123, // 总条数，必须有！
+  pageSize: 12 // 默认10，所以一般不需要
+}
+```
+
+一个 mock 的 api 如下：
+
+```js
+<TableContainer searchApi={params => ({ rows: [{a: 1}, {a: 2}], total: 20 })} >
+```
+
+3. 会出现需要多个搜索 api 的情况，例如很多场景会有 “我的数据”、“全部数据” 两个 tab，这种场景只需要 searchApi 是一个数组就能实现：
+
+```js
+searchApi={[
+  { name: '我的数据', api: xxxx },
+  { name: '全部数据', api: yyyy },
+]}
+```
+
+其中`xxxx`和`yyyy`的写法同 function 类型的 searchApi，具体使用方法请参考[如何使用 searchApi](/demo#使用-searchapi)
+
+### params
+
+- 类型：`object`
+- 默认值：无
+- 必填：No
+- 详细：
+
+允许外部传入自定义参数给搜索请求（searchApi）, 会与 searchApi 的默认请求参数合并，且优先级高（就是参数名同样的 params 里的参数覆盖默认参数）
+
+## `<Search>` 常用 Props
+
+### schema
+
+- 类型：`object`
+- 默认值：无
+- 必填：Yes
+
+可以使用[表单设计器](https://x-render.gitee.io/schema-generator/playground)拖拽生成，导出 schema 即可。
+具体的 api 参考 [form-render 文档](https://x-render.gitee.io/form-render/config/schema)
+
+### hidden
+
+- 类型：`boolean`
+- 默认值：false
+
+是否隐藏搜索项。如果你想渲染一个表格，但是不需要渲染搜索项，那么可以这样写：
+
+```js
+<TableContainer searchApi={searchApi}>
+  <Search hidden />
+  <ProTable columns={columns} />
+</TableContainer>
+```
+
+P.S. 也许你会问，直接不渲染 `<Search />` 行么？抱歉目前不行。
+
+## `<ProTable>` 常用 Props
+
+### 所有 antd table 组件的 props
+
+支持所有 antd table 的 props，但是`dataSource`, `loading`, `pagination`这几个参数是内部状态，不需要填写。最基本的使用就需要填写 `columns`
+
+### headerTitle
+
+- 类型：`string`
+- 默认值：无
+
+  表格标题
+
+### toolbarRender
+
+- 类型：`function`
+- 默认值：无
+- 必填：Yes
+
+1. 表格主体上方的控件，例如“添加”按钮
+2. **注意函数返回值是数组！** 其他写法自由
+
+```js
+<ProTable
+  toolbarRender={() => [
+    <Button key="1">查看日志</Button>,
+    <Button key="2">导出数据</Button>,
+    <Button key="3">创建</Button>,
+  ]}
+/>
+```
+
+### columns
+
+columns 为 antd 已有的 props，所以支持 antd 所有的支持的 [columns](https://ant.design/components/table-cn/#Column) 的配置，但是我们也提供了一些更方便的 api，加快书写:
+
+| 属性      | 描述                                           | 类型                                      | 默认值 |
+| --------- | ---------------------------------------------- | ----------------------------------------- | ------ |
+| ellipsis  | 是否自动缩略                                   | boolean                                   | -      |
+| copyable  | 是否支持复制                                   | boolean                                   | -      |
+| valueType | 值的类型，详见 [valueType 配置](./columns.md)  | `text` \| `money` \| `date` \| `dateTime` | `text` |
+| enum      | 当前列值的枚举，详见 [enum 配置](./columns.md) | object                                    | -      |
+
+## useTable
+
+如果我需要刷新页面，该哪里去取刷新的 api？
+
+```js
+import { useTable } from '@ali/table-render';
+
+// 在任何组件内，哪怕不是一个文件也没事，因为 useTable 实质上是 React 的 Context
+const Customized = () => {
+  const { refresh } = useTable();
+  return <button onClick={refresh}>自定义刷新按钮</button>;
+};
+```
+
+可用的内部 api 有
+
+```js
+const { tableState, setTable, doSearch, refresh } = useTable();
+```
+
+### tableState
+
+```js
+{
+  loading: false, // 表单是否在加载中
+  search: {}, // 选项数据
+  searchApi // 搜索用的api
+  tab: 0, // 如果searchApi是数组，需要在最顶层感知tab，来知道到底点击搜索调用的是啥api
+  dataSource: [], // 表格的数据
+  pagination: {
+    current: 1,
+    pageSize: 10,
+  },
+}
+```
+
+这些是全局的状态，根据需要使用
+
+### setTable
+
+用于修改全局状态的工具函数，setTable 之于 tableState，等同 setState 之于 state
+
+```js
+setTable({
+  loading: true,
+  tab: 2,
+});
+```
+
+### doSearch
+
+搜索的函数，一般用不到
+
+### refresh
+
+刷新函数
+
+1. 直接用：refresh()
+2. 刷新数据，但停留在现有的页码：refresh({ stay: true })
