@@ -1,6 +1,6 @@
 {
   "name": "@ali/table-render",
-  "version": "3.2.21",
+  "version": "0.1.2",
   "description": "协议驱动search-table生成器",
   "scripts": {
     "start": "dumi dev",
