@@ -1,31 +1,19 @@
 ---
+order: 2
+title: 快速上手
 nav:
   order: 1
-  title: 教程
+  title: 指南
 toc: menu
 ---
 
-## 基本 demo
+## 安装
 
-<code src='./demo/basic.jsx' />
+```shell
+npm install table-render --save
+```
 
-## 最简 demo
-
-<code src='./demo/simplest.jsx' />
-
-## 使用 valueType
-
-<code src='./demo/valueType.jsx' />
-
-## 使用 enum
-
-<code src='./demo/enum.jsx' />
-
-## 使用 searchApi
-
-<code src='./demo/searchApi.jsx' />
-
-基本上写一个 table-render，你需要
+## 基本使用
 
 ```js
 import { ProTable, Search, TableContainer, useTable } from 'table-render';

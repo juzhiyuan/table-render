@@ -4,7 +4,7 @@ hero:
   desc: 中后台表单解决方案
   actions:
     - text: Getting Started
-      link: /demo
+      link: /guide
 features:
   - icon: https://gw.alipayobjects.com/zos/bmw-prod/881dc458-f20b-407b-947a-95104b5ec82b/k79dm8ih_w144_h144.png
     title: 现配现用

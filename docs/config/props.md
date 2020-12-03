@@ -9,33 +9,6 @@ toc: menu
 
 # Props
 
-table-render 的 api 视觉上如图
-
-<img src="https://img.alicdn.com/tfs/TB101OZm9slXu8jSZFuXXXg7FXa-1608-1156.png" width="600px" />
-
-## 基本使用
-
-```js
-import { TableContainer, ProTable, Search } from 'table-render';
-
-...
-return (
-  <TableContainer searchApi={searchApi}>
-    <Search {...searchSchema} />
-    <ProTable
-      headerTitle="高级表单"
-      toolbarRender={() => [
-        <Button key="1">查看日志</Button>,
-        <Button key="2">导出数据</Button>,
-        <Button key="3">创建</Button>,
-      ]}
-      // 下面全是antd的props
-      columns={columns}
-    />
-  </TableContainer>
-);
-```
-
 ## `<TableContainer>` 常用 Props
 
 ### searchApi

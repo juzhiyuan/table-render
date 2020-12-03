@@ -46,31 +46,17 @@ const columns = [
     title: (
       <>
         状态
-        <Tooltip placement="top" title="enum">
+        <Tooltip placement="top" title="使用enum">
           <InfoCircleOutlined style={{ marginLeft: 6 }} />
         </Tooltip>
       </>
     ),
     dataIndex: 'state',
-    ellipsis: true,
-  },
-  {
-    title: '标签',
-    dataIndex: 'labels',
-    render: (_, row) => (
-      <Space>
-        {row.labels.map(({ name, color }) => (
-          <Tag color={color} key={name}>
-            {name}
-          </Tag>
-        ))}
-      </Space>
-    ),
-  },
-  {
-    title: '金额',
-    dataIndex: 'money',
-    valueType: 'money',
+    enum: {
+      open: '未解决',
+      closed: '已解决',
+    },
+    width: 100,
     ellipsis: true,
   },
   {
@@ -79,35 +65,6 @@ const columns = [
     dataIndex: 'created_at',
     valueType: 'date',
     ellipsis: true,
-  },
-  {
-    title: '操作',
-    render: (text, row) => (
-      <Space>
-        <a target="_blank" key="1">
-          <div
-            onClick={() => {
-              alert('Table - Render !');
-            }}
-          >
-            链路
-          </div>
-        </a>
-        <a
-          href="https://x-render.gitee.io/form-render/"
-          target="_blank"
-          rel="noopener noreferrer"
-          key="2"
-        >
-          查看
-        </a>
-        <Dropdown key="3" overlay={menu} placement="bottomLeft" arrow>
-          <a target="_blank">
-            <EllipsisOutlined />
-          </a>
-        </Dropdown>
-      </Space>
-    ),
   },
 ];
 
@@ -166,13 +123,13 @@ const Demo = () => {
               查看日志
             </Button>,
             <Button key="out">导出数据</Button>,
+            <Customize />,
             <Button key="primary" type="primary">
               <PlusOutlined />
               创建
             </Button>,
           ]}
         />
-        <Customize />
       </TableContainer>
     </div>
   );
@@ -180,7 +137,7 @@ const Demo = () => {
 
 const Customize = () => {
   const data = useTable();
-  return <button onClick={data.refresh}>自定义一个刷新按钮</button>;
+  return <Button onClick={data.refresh}>刷新按钮</Button>;
 };
 
 export default Demo;
