@@ -25,7 +25,7 @@ toc: menu
 
 <code src='./demo/searchApi.jsx' />
 
-基本上写一个 search table，你需要
+基本上写一个 table-render，你需要
 
 ```js
 import { ProTable, Search, TableContainer, useTable } from '@ali/table-render';

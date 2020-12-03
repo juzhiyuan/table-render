@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { ProTable, Search, TableContainer, useTable } from '@ali/table-render';
+import { ProTable, Search, TableContainer, useTable } from 'table-render';
 
 // 可以使用schema编辑器配置 https://form-render.github.io/schema-generator/
 const schema = {
