@@ -1,10 +1,36 @@
+import { Select } from 'antd';
 import React, { useRef } from 'react';
 import { ProTable, Search, TableContainer, useTable } from 'table-render';
 
+const { Option } = Select;
+
+const CustomInput = ({ value, onChange, name }) => {
+  return (
+    <Select
+      value={value}
+      style={{ width: 120 }}
+      onChange={value => {
+        onChange(name, value);
+      }}
+    >
+      <Option value="jack">Jack</Option>
+      <Option value="lucy">Lucy</Option>
+      <Option value="disabled" disabled>
+        Disabled
+      </Option>
+      <Option value="Yiminghe">yiminghe</Option>
+    </Select>
+  );
+};
 // 可以使用schema编辑器配置 https://form-render.github.io/schema-generator/
 const schema = {
   type: 'object',
   properties: {
+    string: {
+      title: '测试',
+      type: 'string',
+      'ui:widget': 'customInput',
+    },
     created_at: {
       title: '创建时间',
       type: 'string',
@@ -73,7 +99,7 @@ const Demo = () => {
   return (
     <div style={{ background: 'rgb(245,245,245)' }}>
       <TableContainer ref={tableRef} searchApi={searchApi}>
-        <Search schema={schema} />
+        <Search schema={schema} widgets={{ customInput: CustomInput }} />
         <ProTable headerTitle="最简表格" columns={columns} rowKey="id" />
       </TableContainer>
     </div>
