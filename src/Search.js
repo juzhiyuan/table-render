@@ -10,7 +10,7 @@ const SearchBtn = ({ clearSearch }) => {
     <div className="flex justify-end w-100">
       <Button
         loading={loading}
-        className="mr2"
+        className="mr"
         type="primary"
         onClick={() => refresh()} // 必须要这么写，否则会把 e 作为 params 传入
       >
@@ -85,7 +85,7 @@ const Search = props => {
   };
 
   const clearSearch = () => {
-    sref.current && sref.current.resetData({});
+    sref.current && sref.current.resetData();
   };
 
   useEffect(() => {

@@ -180,7 +180,7 @@ const Demo = () => {
 
 const Customize = () => {
   const data = useTable();
-  return <button onClick={data.refresh}>刷新按钮</button>;
+  return <Button onClick={data.refresh}>刷新按钮</Button>;
 };
 
 export default Demo;
