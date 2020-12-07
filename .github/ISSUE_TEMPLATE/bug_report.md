@@ -23,4 +23,4 @@ assignees: ''
 <!--
   请尽可能提供一个最小demo，我们会尽快解决并予以回复
 -->
-https://codesandbox.io/s/form-renderjichudemo-f55oy
+https://codesandbox.io/s/table-render-demo-qi3sf
