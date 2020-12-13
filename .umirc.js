@@ -10,6 +10,10 @@ export default defineConfig({
   navs: [
     null,
     {
+      title: '国内镜像',
+      path: 'https://x-render.gitee.io/table-render/',
+    },
+    {
       title: 'GitHub',
       path: 'https://github.com/form-render/table-render',
     },

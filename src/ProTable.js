@@ -14,9 +14,10 @@ const ProTable = props => {
   const { dataSource, pagination, loading, searchApi } = tableState;
 
   const onPageChange = (page, pageSize) => {
-    setTable({ pagination: { ...pagination, current: page } });
-    doSearch({ current: page });
+    setTable({ pagination: { ...pagination, current: page, pageSize } });
+    doSearch({ current: page, pageSize });
   };
+
   const { headerTitle, toolbarRender, columns } = props;
 
   columns.map(item => {
@@ -51,6 +52,7 @@ const ProTable = props => {
       pageSize: pagination.pageSize,
       total: pagination.total,
       current: pagination.current,
+      showSizeChanger: true,
     },
     loading,
   };

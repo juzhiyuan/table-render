@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { ProTable, Search, TableContainer, useTable } from 'table-render';
+import request from 'umi-request';
 
 // 可以使用schema编辑器配置 https://form-render.github.io/schema-generator/
 const schema = {
@@ -49,23 +50,18 @@ const columns = [
 ];
 
 const searchApi = params => {
-  return {
-    rows: [
-      {
-        id: 624748504,
-        title: 'mock数据1',
-        state: 'closed',
-        created_at: '2020-05-26T09:42:56Z',
-      },
-      {
-        id: 624691229,
-        title: 'mock数据2',
-        state: 'open',
-        created_at: '2020-05-26T08:19:22Z',
-      },
-    ],
-    total: 2,
-  };
+  return request
+    .get(
+      'https://www.fastmock.site/mock/62ab96ff94bc013592db1f67667e9c76/getTableList/api/simple',
+      { params },
+    )
+    .then(res => {
+      console.log('response:', res);
+      if (res && res.data) {
+        return { rows: res.data, total: res.data.length }; // 注意一定要返回 rows 和 total
+      }
+    })
+    .catch(e => console.log('Oops, error', e));
 };
 
 const Demo = () => {
