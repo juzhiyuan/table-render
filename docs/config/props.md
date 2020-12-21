@@ -199,7 +199,7 @@ const { tableState, setTable, doSearch, refresh } = useTable();
 ```js
 setTable({
   loading: true,
-  tab: 2,
+  tab: 1,
 });
 ```
 
