@@ -44,14 +44,17 @@ const ProTable = props => {
     ...props,
     // 底下这些值全局控制，不准在使用ProTable时用props赋值
     dataSource,
-    pagination: {
-      onChange: onPageChange,
-      size: 'small',
-      ...props.pagination,
-      pageSize: pagination.pageSize,
-      total: pagination.total,
-      current: pagination.current,
-    },
+    pagination:
+      props.pagination === false
+        ? false
+        : {
+            onChange: onPageChange,
+            size: 'small',
+            ...props.pagination,
+            pageSize: pagination.pageSize,
+            total: pagination.total,
+            current: pagination.current,
+          },
     loading,
   };
 
@@ -106,10 +109,10 @@ const TableTitle = ({ title }) => {
     if (searchApi.length === 1)
       return <div className="tr-single-tab">{searchApi[0].name}</div>;
     return (
-      <Radio.Group onChange={onTabChange} defaultValue={_tab.toString()}>
+      <Radio.Group onChange={onTabChange} value={_tab}>
         {searchApi.map((item, i) => {
           return (
-            <Radio.Button key={item.name} value={i.toString()}>
+            <Radio.Button key={i.toString()} value={i}>
               {item.name}
             </Radio.Button>
           );

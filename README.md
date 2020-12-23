@@ -7,12 +7,21 @@
 
 ## 使用方法
 
+table-render 目前默认使用 ant design，所以请在 antd 项目下使用，如果要单独使用，不要忘记安装 antd
+
+```sh
+npm i table-render antd
 ```
-npm i table-render --save
+
+or
+
+```sh
+yarn add table-render antd
 ```
 
 ```js
 import React from 'react';
+import { Button } from 'antd';
 import { ProTable, Search, TableContainer, useTable } from 'table-render';
 
 // 可以使用schema编辑器配置 https://form-render.github.io/schema-generator/
@@ -85,7 +94,7 @@ const searchApi = params => {
 const Demo = () => {
   return (
     <TableContainer searchApi={searchApi}>
-      <Search {...searchSchema} />
+      <Search schema={searchSchema} />
       <ProTable
         headerTitle="高级表单"
         toolbarRender={() => [

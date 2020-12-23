@@ -178,17 +178,42 @@ const { tableState, setTable, doSearch, refresh } = useTable();
 ```js
 setTable({
   loading: true,
-  tab: 2,
+  tab: 1,
 });
 ```
 
 ### doSearch
 
-搜索的函数，一般用不到
+搜索的函数，请使用 refresh
 
 ### refresh
 
-刷新函数
+type: function
+
+刷新函数。
+
+| 入参 | 类型    | 说明                                                                            |
+| ---- | ------- | ------------------------------------------------------------------------------- |
+| stay | boolean | 刷新是否保留在现在的页码上，默认 false，回到第一页                              |
+| tab  | number  | 0,1,2.. 如果 searchApi 是数组会出现的搜索选择 tab，用于强制搜索某个 tab，不常用 |
 
 1. 直接用：refresh()
 2. 刷新数据，但停留在现有的页码：refresh({ stay: true })
+
+### changeTab
+
+type: function
+
+手动切换 tab 的函数，例如目前两个搜索 tab： “我的活动”，“全部活动” （分别对应 tab 值为 0 和 1）
+
+```js
+const { changeTab } = useTable()
+
+...
+
+const onClick = () => {
+  changeTab(1)
+}
+```
+
+以上代码将手动切换到“全部活动”（tab = 1）
