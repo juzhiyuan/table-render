@@ -103,9 +103,20 @@ const Demo = () => {
       <TableContainer ref={tableRef} searchApi={searchApi}>
         <Search schema={schema} />
         <ProTable headerTitle="最简表格" columns={columns} rowKey="id" />
+        <Tester />
       </TableContainer>
     </div>
   );
 };
 
 export default Demo;
+
+const Tester = () => {
+  const { changeTab } = useTable();
+
+  const switchToAll = () => {
+    changeTab(1);
+  };
+
+  return <button onClick={switchToAll}>切换到全部</button>;
+};

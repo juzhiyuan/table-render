@@ -29,7 +29,10 @@ const useTableRoot = props => {
     const { current, pageSize, tab } = params || {};
     const _current = current || 1;
     const _pageSize = pageSize || 10;
-    const _tab = tab || currentTab;
+    let _tab = currentTab;
+    if (['string', 'number'].indexOf(typeof tab) > -1) {
+      _tab = tab;
+    }
     // console.log(params, { _current, _pageSize, _tab }, 'searchParams');
     const _pagination = { current: _current, pageSize: _pageSize };
     if (typeof searchApi === 'function') {
@@ -74,10 +77,21 @@ const useTableRoot = props => {
 
   const refresh = params => {
     const _stay = (params && params.stay) || false;
+    const _tab = params && params.tab;
     doSearch({
       current: _stay ? pagination.current : 1,
+      tab: _tab,
       pageSize: pagination.pageSize,
     });
+  };
+
+  const changeTab = tab => {
+    if (['string', 'number'].indexOf(typeof tab) > -1) {
+      set({ tab });
+      refresh({ tab });
+    } else {
+      console.error('changeTab的入参必须是number或string');
+    }
   };
 
   const context = {
@@ -85,6 +99,7 @@ const useTableRoot = props => {
     setTable: set,
     doSearch,
     refresh,
+    changeTab,
   };
   return context;
 };
