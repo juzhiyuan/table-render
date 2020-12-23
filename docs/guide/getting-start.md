@@ -21,9 +21,9 @@ or
 yarn add table-render antd
 ```
 
-基本上写一个 table-render，你需要
+实现代码如下：
 
-```jsx
+```js
 import React from 'react';
 import { Button } from 'antd';
 import { ProTable, Search, TableContainer, useTable } from 'table-render';
