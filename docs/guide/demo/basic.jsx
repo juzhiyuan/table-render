@@ -1,13 +1,9 @@
 import React, { useRef } from 'react';
 import { ProTable, Search, TableContainer, useTable } from 'table-render';
-import { Tag, Space, Menu, Dropdown, message, Button, Tooltip } from 'antd';
-import {
-  PlusOutlined,
-  EllipsisOutlined,
-  InfoCircleOutlined,
-} from '@ant-design/icons';
+import { Tag, Space, Menu, Dropdown, message } from 'antd';
+import { Button } from 'antd';
+import { PlusOutlined, EllipsisOutlined } from '@ant-design/icons';
 import request from 'umi-request';
-
 // 可以使用schema编辑器配置 https://form-render.github.io/schema-generator/
 const schema = {
   type: 'object',
@@ -39,20 +35,11 @@ const columns = [
     title: '标题',
     dataIndex: 'title',
     ellipsis: true,
-    copyable: true,
-    width: 300,
+    valueType: 'text',
   },
   {
-    title: (
-      <>
-        状态
-        <Tooltip placement="top" title="enum">
-          <InfoCircleOutlined style={{ marginLeft: 6 }} />
-        </Tooltip>
-      </>
-    ),
+    title: '状态',
     dataIndex: 'state',
-    ellipsis: true,
   },
   {
     title: '标签',
@@ -68,17 +55,10 @@ const columns = [
     ),
   },
   {
-    title: '金额',
-    dataIndex: 'money',
-    valueType: 'money',
-    ellipsis: true,
-  },
-  {
     title: '创建时间',
     key: 'since',
     dataIndex: 'created_at',
     valueType: 'date',
-    ellipsis: true,
   },
   {
     title: '操作',
@@ -87,7 +67,7 @@ const columns = [
         <a target="_blank" key="1">
           <div
             onClick={() => {
-              alert('Table - Render !');
+              alert('Table-Render!');
             }}
           >
             链路
@@ -135,11 +115,7 @@ const Demo = () => {
       .then(res => {
         console.log('response:', res);
         if (res && res.data) {
-          const data = res.data.map(item =>
-            Object.assign(item, { money: 999999999.99 }),
-          );
-          console.log('dataSource', data);
-          return { rows: data, total: res.data.length }; // 注意一定要返回 rows 和 total
+          return { rows: res.data, total: res.data.length }; // 注意一定要返回 rows 和 total
         }
       })
       .catch(e => console.log('Oops, error', e));
@@ -159,6 +135,7 @@ const Demo = () => {
         <Search schema={schema} />
         <ProTable
           columns={columns}
+          dataSource={[]}
           headerTitle="高级表单"
           rowKey="id"
           toolbarRender={() => [
@@ -172,15 +149,9 @@ const Demo = () => {
             </Button>,
           ]}
         />
-        <Customize />
       </TableContainer>
     </div>
   );
-};
-
-const Customize = () => {
-  const data = useTable();
-  return <button onClick={data.refresh}>自定义一个刷新按钮</button>;
 };
 
 export default Demo;

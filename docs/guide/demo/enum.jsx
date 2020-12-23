@@ -1,9 +1,13 @@
 import React, { useRef } from 'react';
 import { ProTable, Search, TableContainer, useTable } from 'table-render';
-import { Tag, Space, Menu, Dropdown, message } from 'antd';
-import { Button } from 'antd';
-import { PlusOutlined, EllipsisOutlined } from '@ant-design/icons';
+import { Tag, Space, Menu, Dropdown, message, Button, Tooltip } from 'antd';
+import {
+  PlusOutlined,
+  EllipsisOutlined,
+  InfoCircleOutlined,
+} from '@ant-design/icons';
 import request from 'umi-request';
+
 // 可以使用schema编辑器配置 https://form-render.github.io/schema-generator/
 const schema = {
   type: 'object',
@@ -35,59 +39,32 @@ const columns = [
     title: '标题',
     dataIndex: 'title',
     ellipsis: true,
-    valueType: 'text',
+    copyable: true,
+    width: 300,
   },
   {
-    title: '状态',
-    dataIndex: 'state',
-  },
-  {
-    title: '标签',
-    dataIndex: 'labels',
-    render: (_, row) => (
-      <Space>
-        {row.labels.map(({ name, color }) => (
-          <Tag color={color} key={name}>
-            {name}
-          </Tag>
-        ))}
-      </Space>
+    title: (
+      <>
+        状态
+        <Tooltip placement="top" title="使用enum">
+          <InfoCircleOutlined style={{ marginLeft: 6 }} />
+        </Tooltip>
+      </>
     ),
+    dataIndex: 'state',
+    enum: {
+      open: '未解决',
+      closed: '已解决',
+    },
+    width: 100,
+    ellipsis: true,
   },
   {
     title: '创建时间',
     key: 'since',
     dataIndex: 'created_at',
     valueType: 'date',
-  },
-  {
-    title: '操作',
-    render: (text, row) => (
-      <Space>
-        <a target="_blank" key="1">
-          <div
-            onClick={() => {
-              alert('Table-Render!');
-            }}
-          >
-            链路
-          </div>
-        </a>
-        <a
-          href="https://x-render.gitee.io/form-render/"
-          target="_blank"
-          rel="noopener noreferrer"
-          key="2"
-        >
-          查看
-        </a>
-        <Dropdown key="3" overlay={menu} placement="bottomLeft" arrow>
-          <a target="_blank">
-            <EllipsisOutlined />
-          </a>
-        </Dropdown>
-      </Space>
-    ),
+    ellipsis: true,
   },
 ];
 
@@ -115,7 +92,11 @@ const Demo = () => {
       .then(res => {
         console.log('response:', res);
         if (res && res.data) {
-          return { rows: res.data, total: res.data.length }; // 注意一定要返回 rows 和 total
+          const data = res.data.map(item =>
+            Object.assign(item, { money: 999999999.99 }),
+          );
+          console.log('dataSource', data);
+          return { rows: data, total: res.data.length }; // 注意一定要返回 rows 和 total
         }
       })
       .catch(e => console.log('Oops, error', e));
@@ -142,6 +123,7 @@ const Demo = () => {
               查看日志
             </Button>,
             <Button key="out">导出数据</Button>,
+            <Customize />,
             <Button key="primary" type="primary">
               <PlusOutlined />
               创建
@@ -151,6 +133,11 @@ const Demo = () => {
       </TableContainer>
     </div>
   );
+};
+
+const Customize = () => {
+  const data = useTable();
+  return <Button onClick={data.refresh}>刷新按钮</Button>;
 };
 
 export default Demo;

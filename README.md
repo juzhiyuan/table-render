@@ -1,4 +1,4 @@
-# Table Render - 中后台表单解决方案
+# Table Render - 中后台表格解决方案
 
 ## 简介
 
@@ -25,7 +25,7 @@ import { Button } from 'antd';
 import { ProTable, Search, TableContainer, useTable } from 'table-render';
 
 // 可以使用schema编辑器配置 https://form-render.github.io/schema-generator/
-const schema = {
+const searchSchema = {
   type: 'object',
   properties: {
     created_at: {

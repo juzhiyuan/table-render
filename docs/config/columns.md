@@ -1,5 +1,6 @@
 ---
 order: 3
+title: columns
 nav:
   order: 2
   title: 配置项
