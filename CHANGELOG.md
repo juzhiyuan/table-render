@@ -3,7 +3,11 @@
 - [+] 新增 changeTab 方法，支持 tab 手动切换
 - [!] pagination 支持设为 false 隐藏
 
-### 0.1.4
+### v0.1.5
+
+- [!] 修复无法选择 pageSize 的 bug
+
+### v0.1.4
 
 - [!] 查询按钮的边距单位改用 px
 

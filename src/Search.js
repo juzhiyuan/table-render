@@ -30,6 +30,7 @@ const Search = props => {
   const sref = useRef(); // 搜索组件的ref
 
   const onChange = newSearch => {
+    debugger;
     setTable({ search: newSearch });
   };
   // TODO: 重新检查一下这个逻辑
@@ -85,7 +86,7 @@ const Search = props => {
   };
 
   const clearSearch = () => {
-    sref.current && sref.current.resetData();
+    sref.current && sref.current.resetData({});
   };
 
   useEffect(() => {
