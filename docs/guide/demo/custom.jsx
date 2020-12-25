@@ -133,18 +133,12 @@ const Demo = () => {
       <TableContainer ref={tableRef} searchApi={searchApi}>
         <Search
           schema={schema}
-          searchBtnRender={(refresh, clearSearch) => (
-            <>
-              <Button
-                type="primary"
-                style={{ marginRight: 8 }}
-                onClick={() => refresh()}
-              >
-                查询
-              </Button>
-              <Button onClick={() => clearSearch()}>重置</Button>
-            </>
-          )}
+          searchBtnRender={(refresh, clearSearch) => [
+            <Button type="primary" onClick={() => refresh()}>
+              查询
+            </Button>,
+            <Button onClick={() => clearSearch()}>重置</Button>,
+          ]}
         />
         <ProTable
           columns={columns}

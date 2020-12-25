@@ -29,8 +29,6 @@ const Search = props => {
   const modifiedSchema = useRef();
   const sref = useRef(); // 搜索组件的ref
 
-  const SearchBtnRender = props.searchBtnRender;
-
   const onChange = newSearch => {
     setTable({ search: newSearch });
   };
@@ -108,6 +106,11 @@ const Search = props => {
 
   if (props.hidden) return null;
 
+  const searchBtnArr =
+    typeof props.searchBtnRender === 'function'
+      ? props.searchBtnRender(refresh, clearSearch)
+      : [];
+
   return (
     <div
       className="tr-search"
@@ -129,7 +132,15 @@ const Search = props => {
           searchBtn: () =>
             props.searchBtnRender ? (
               <div className="flex justify-end w-100">
-                {props.searchBtnRender(refresh, clearSearch)}
+                {Array.isArray(searchBtnArr) &&
+                  searchBtnArr.map((ui, idx) => {
+                    return (
+                      <div key={idx.toString()} style={{ marginLeft: 8 }}>
+                        {ui}
+                      </div>
+                    );
+                  })}
+                {/* {props.searchBtnRender(refresh, clearSearch)} */}
               </div>
             ) : (
               <SearchBtn clearSearch={clearSearch} />
