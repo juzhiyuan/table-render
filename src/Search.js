@@ -128,7 +128,9 @@ const Search = props => {
         widgets={{
           searchBtn: () =>
             props.searchBtnRender ? (
-              props.searchBtnRender(refresh, clearSearch)
+              <div className="flex justify-end w-100">
+                {props.searchBtnRender(refresh, clearSearch)}
+              </div>
             ) : (
               <SearchBtn clearSearch={clearSearch} />
             ),
