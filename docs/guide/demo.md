@@ -26,3 +26,7 @@ toc: menu
 ## 使用 searchApi
 
 <code src='./demo/searchApi.jsx' />
+
+## 使用 searchBtnRender
+
+<code src='./demo/custom.jsx' />

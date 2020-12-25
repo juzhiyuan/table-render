@@ -29,6 +29,8 @@ const Search = props => {
   const modifiedSchema = useRef();
   const sref = useRef(); // 搜索组件的ref
 
+  const SearchBtnRender = props.searchBtnRender;
+
   const onChange = newSearch => {
     setTable({ search: newSearch });
   };
@@ -124,7 +126,12 @@ const Search = props => {
         onMount={onMount}
         displayType="row"
         widgets={{
-          searchBtn: () => <SearchBtn clearSearch={clearSearch} />,
+          searchBtn: () =>
+            props.searchBtnRender ? (
+              props.searchBtnRender(refresh, clearSearch)
+            ) : (
+              <SearchBtn clearSearch={clearSearch} />
+            ),
           ...props.widgets,
         }}
       />
