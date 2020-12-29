@@ -30,3 +30,7 @@ toc: menu
 ## 使用 searchBtnRender
 
 <code src='./demo/custom.jsx' />
+
+## 使用 cardList
+
+<code src='./demo/card.jsx' />
