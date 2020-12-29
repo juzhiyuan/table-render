@@ -86,7 +86,7 @@ const cardRenderOptions = {
       <a
         onClick={e => {
           e.stopPropagation();
-          alert(index);
+          alert(card, index);
         }}
       >
         action
@@ -124,7 +124,6 @@ const Demo = () => {
         <Search schema={schema} />
         <CardList
           onCardClick={(item, idx) => alert(JSON.stringify(item))}
-          contentRender={contentRenderFunc}
           cardRender={cardRenderOptions}
           paginationOptions={{ size: 'default' }}
         />

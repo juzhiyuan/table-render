@@ -35,7 +35,6 @@ const CardList = props => {
   const {
     headerTitle,
     toolbarRender,
-    contentRender,
     cardExtra,
     paginationOptions,
     onCardClick,
@@ -85,7 +84,7 @@ const CardList = props => {
                 hoverable={true}
                 style={{ width: card.width || '100%', display: 'inline-block' }}
                 onClick={() => onCardClick(card, index)}
-                extra={cardExtra ? cardExtra(card, index) : null}
+                extra={header.extra && header.extra(card, index)}
                 actions={footer(card, index)}
               >
                 {content && content.description && (
