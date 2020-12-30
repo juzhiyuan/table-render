@@ -70,23 +70,13 @@ const searchApi = params => {
     .catch(e => console.log('Oops, error', e));
 };
 
-const contentRenderFunc = (item, idx) => {
-  return (
-    <>
-      <p>{item.creator}</p>
-      <p>{item.createTime}</p>
-    </>
-  );
-};
-
 const cardRenderOptions = {
   header: {
-    title: (card, index) => card.title,
+    title: 'title',
     extra: (card, index) => (
       <a
         onClick={e => {
           e.stopPropagation();
-          alert(card, index);
         }}
       >
         action
@@ -94,7 +84,7 @@ const cardRenderOptions = {
     ),
   },
   content: {
-    description: (card, index) => card.description,
+    description: 'description',
     list: [
       {
         title: '创建者',
@@ -108,12 +98,13 @@ const cardRenderOptions = {
         ),
       },
     ],
+    remark: 'remark',
   },
-  footer: (card, index) => [
-    <SettingOutlined key="setting" />,
-    <EditOutlined key="edit" />,
-    <EllipsisOutlined key="ellipsis" />,
-  ],
+  // footer: (card, index) => [
+  //   <SettingOutlined onClick={e => e.stopPropagation()} key="setting" />,
+  //   <EditOutlined onClick={e => e.stopPropagation()} key="edit" />,
+  //   <EllipsisOutlined onClick={e => e.stopPropagation()} key="ellipsis" />,
+  // ],
 };
 
 const Demo = () => {

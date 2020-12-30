@@ -35,7 +35,6 @@ const CardList = props => {
   const {
     headerTitle,
     toolbarRender,
-    cardExtra,
     paginationOptions,
     onCardClick,
     cardRender,
@@ -45,7 +44,7 @@ const CardList = props => {
     console.error('请根据文档填入正确的contentRender');
   }
 
-  const { header, description, content, footer } = cardRender;
+  const { header, content, footer } = cardRender;
 
   const toolbarArray =
     typeof toolbarRender === 'function' ? toolbarRender() : [];
@@ -80,12 +79,12 @@ const CardList = props => {
           {dataSource.map((card, index) => (
             <Col key={index.toString()} span={6} className="card-render">
               <Card
-                title={card.title}
+                title={card[header.title.dataIndex || header.title]}
                 hoverable={true}
                 style={{ width: card.width || '100%', display: 'inline-block' }}
                 onClick={() => onCardClick(card, index)}
-                extra={header.extra && header.extra(card, index)}
-                actions={footer(card, index)}
+                extra={header && header.extra && header.extra(card, index)}
+                actions={footer && footer(card, index)}
               >
                 {content && content.description && (
                   <Typography.Paragraph
@@ -95,12 +94,22 @@ const CardList = props => {
                     }}
                     ellipsis={{ rows: 1 }}
                   >
-                    {content.description(card, index)}
+                    {card[content.description.dataIndex || content.description]}
                   </Typography.Paragraph>
                 )}
-                {content &&
-                  content.list.length &&
-                  listRender(card, content.list)}
+                {content && content.list && listRender(card, content.list)}
+                {content && content.remark && (
+                  <Typography.Paragraph
+                    style={{
+                      color: 'rgb(102, 102, 102)',
+                      marginTop: '8px',
+                      fontSize: 12,
+                    }}
+                    ellipsis={{ rows: 1 }}
+                  >
+                    {card[content.remark.dataIndex || content.remark]}
+                  </Typography.Paragraph>
+                )}
               </Card>
             </Col>
           ))}
@@ -121,19 +130,34 @@ const CardList = props => {
 
 export default CardList;
 
-const listRender = (card, list) => {
-  return list.map((item, idx) => {
+const listRender = (card, content) => {
+  return content.map((item, idx) => {
     if (item.render && typeof item.render === 'function') {
       return (
-        <p key={idx.toString()}>
-          {item.title}: {item.render(item, idx)}
-        </p>
+        <div key={idx.toString()}>
+          <Row>
+            <Col span={6}>
+              <span>{item.title}</span>:
+            </Col>
+            <Col>
+              <span style={{ marginLeft: 8 }}>{item.render(item, idx)}</span>
+            </Col>
+          </Row>
+        </div>
       );
     }
+
     return (
-      <p key={idx.toString()}>
-        {item.title}: {card[item.dataIndex]}
-      </p>
+      <div key={idx.toString()}>
+        <Row>
+          <Col span={6}>
+            <span>{item.title}</span>:
+          </Col>
+          <Col>
+            <span style={{ marginLeft: 8 }}>{card[item.dataIndex]}</span>
+          </Col>
+        </Row>
+      </div>
     );
   });
 };
