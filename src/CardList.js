@@ -140,7 +140,7 @@ const listRender = (card, content) => {
               <span>{item.title}</span>:
             </Col>
             <Col>
-              <span style={{ marginLeft: 8 }}>{item.render(item, idx)}</span>
+              <span>{item.render(item, idx)}</span>
             </Col>
           </Row>
         </div>
@@ -150,11 +150,15 @@ const listRender = (card, content) => {
     return (
       <div key={idx.toString()}>
         <Row>
-          <Col span={6}>
-            <span>{item.title}</span>:
-          </Col>
+          {item.title && (
+            <Col span={6}>
+              <span>{item.title}</span>:
+            </Col>
+          )}
           <Col>
-            <span style={{ marginLeft: 8 }}>{card[item.dataIndex]}</span>
+            <span>
+              {typeof item === 'string' ? card[item] : card[item.dataIndex]}
+            </span>
           </Col>
         </Row>
       </div>

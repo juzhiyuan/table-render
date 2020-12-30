@@ -85,26 +85,16 @@ const cardRenderOptions = {
   },
   content: {
     description: 'description',
+    // list: ['creator', 'createTime'],
     list: [
       {
         title: '创建者',
         dataIndex: 'creator',
       },
-      {
-        title: '创建时间',
-        dataIndex: 'createTime',
-        render: (card, index) => (
-          <span>{dayjs(card.createTime).format('YYYY-MM-DD')}</span>
-        ),
-      },
+      'createTime',
     ],
     remark: 'remark',
   },
-  // footer: (card, index) => [
-  //   <SettingOutlined onClick={e => e.stopPropagation()} key="setting" />,
-  //   <EditOutlined onClick={e => e.stopPropagation()} key="edit" />,
-  //   <EllipsisOutlined onClick={e => e.stopPropagation()} key="ellipsis" />,
-  // ],
 };
 
 const Demo = () => {
