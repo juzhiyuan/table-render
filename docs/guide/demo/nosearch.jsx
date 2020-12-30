@@ -1,19 +1,6 @@
-import React, { useRef } from 'react';
-import { CardList, Search, TableContainer, useTable } from 'table-render';
+import React, { useRef, useEffect } from 'react';
+import { ProTable, Search, TableContainer, useTable } from 'table-render';
 import request from 'umi-request';
-
-// 可以使用schema编辑器配置 https://form-render.github.io/schema-generator/
-const schema = {
-  type: 'object',
-  properties: {
-    created_at: {
-      title: '创建时间',
-      type: 'string',
-      format: 'date',
-      'ui:width': '25%',
-    },
-  },
-};
 
 // 配置完全透传antd table
 const columns = [
@@ -52,7 +39,7 @@ const columns = [
 const searchApi = params => {
   return request
     .get(
-      'https://www.fastmock.site/mock/62ab96ff94bc013592db1f67667e9c76/getTableList/api/getCardList',
+      'https://www.fastmock.site/mock/62ab96ff94bc013592db1f67667e9c76/getTableList/api/simple',
       { params },
     )
     .then(res => {
@@ -64,44 +51,16 @@ const searchApi = params => {
     .catch(e => console.log('Oops, error', e));
 };
 
-const cardRenderOptions = {
-  header: {
-    title: 'title',
-    extra: (card, index) => (
-      <a
-        onClick={e => {
-          e.stopPropagation();
-        }}
-      >
-        action
-      </a>
-    ),
-  },
-  content: {
-    description: 'description',
-    // list: ['creator', 'createTime'],
-    list: [
-      {
-        title: '创建者',
-        dataIndex: 'creator',
-      },
-      'createTime',
-    ],
-    remark: 'remark',
-  },
-};
-
 const Demo = () => {
   const tableRef = useRef();
+  useEffect(() => {
+    const { refresh } = tableRef.current;
+    refresh();
+  }, []);
   return (
     <div style={{ background: 'rgb(245,245,245)' }}>
       <TableContainer ref={tableRef} searchApi={searchApi}>
-        <Search schema={schema} />
-        <CardList
-          onCardClick={(item, idx) => alert(JSON.stringify(item))}
-          cardRender={cardRenderOptions}
-          paginationOptions={{ size: 'default' }}
-        />
+        <ProTable headerTitle="最简表格" columns={columns} rowKey="id" />
       </TableContainer>
     </div>
   );

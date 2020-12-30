@@ -34,3 +34,7 @@ toc: menu
 ## 使用 cardList
 
 <code src='./demo/card.jsx' />
+
+## 不使用 searchForm
+
+<code src='./demo/nosearch.jsx' />

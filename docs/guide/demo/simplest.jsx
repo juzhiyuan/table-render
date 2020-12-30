@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useLayoutEffect, useEffect } from 'react';
 import { ProTable, Search, TableContainer, useTable } from 'table-render';
 import request from 'umi-request';
 
