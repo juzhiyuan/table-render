@@ -3,6 +3,7 @@ import { useSet, useTable } from './hooks';
 import { Ctx } from './context';
 import Search from './Search';
 import ProTable from './ProTable';
+import CardList from './CardList';
 import { message, ConfigProvider } from 'antd';
 import { isObj } from './utils';
 import _get from 'lodash.get';
@@ -20,6 +21,7 @@ const useTableRoot = props => {
     pagination: {
       current: 1,
       pageSize: props.pageSize || 10,
+      total: 1,
     },
   });
 
@@ -118,4 +120,4 @@ const Container = (props, ref) => {
 
 const TableContainer = forwardRef(Container);
 
-export { Search, ProTable, TableContainer, useTable };
+export { Search, ProTable, CardList, TableContainer, useTable };
