@@ -18,6 +18,8 @@ import {
 } from '@ant-design/icons';
 import './card.css';
 
+const { Meta } = Card;
+
 const CardList = props => {
   if (props.dataSource) {
     console.error(
@@ -79,24 +81,16 @@ const CardList = props => {
           {dataSource.map((card, index) => (
             <Col key={index.toString()} span={6} className="card-render">
               <Card
-                title={card[header.title.dataIndex || header.title]}
                 hoverable={true}
                 style={{ width: card.width || '100%', display: 'inline-block' }}
                 onClick={() => onCardClick(card, index)}
                 extra={header && header.extra && header.extra(card, index)}
                 actions={footer && footer(card, index)}
               >
-                {content && content.description && (
-                  <Typography.Paragraph
-                    style={{
-                      color: 'rgba(0,0,0,.45)',
-                      marginBottom: '8px',
-                    }}
-                    ellipsis={{ rows: 1 }}
-                  >
-                    {card[content.description.dataIndex || content.description]}
-                  </Typography.Paragraph>
-                )}
+                <Meta
+                  title={card[header.title.dataIndex || header.title]}
+                  description={content && content.description}
+                />
                 {content && content.list && listRender(card, content.list)}
                 {content && content.remark && (
                   <Typography.Paragraph
@@ -134,7 +128,7 @@ const listRender = (card, content) => {
   return content.map((item, idx) => {
     if (item.render && typeof item.render === 'function') {
       return (
-        <div key={idx.toString()}>
+        <div key={idx.toString()} style={{ marginTop: 8 }}>
           <Row>
             <Col span={6}>
               <span>{item.title}</span>:
@@ -148,7 +142,7 @@ const listRender = (card, content) => {
     }
 
     return (
-      <div key={idx.toString()}>
+      <div key={idx.toString()} style={{ marginTop: 8 }}>
         <Row>
           {item.title && (
             <Col span={6}>

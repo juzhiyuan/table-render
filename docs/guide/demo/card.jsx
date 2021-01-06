@@ -65,6 +65,7 @@ const searchApi = params => {
 };
 
 const cardRenderOptions = {
+  type: 'default',
   header: {
     title: 'title',
     extra: (card, index) => (
@@ -79,14 +80,7 @@ const cardRenderOptions = {
   },
   content: {
     description: 'description',
-    // list: ['creator', 'createTime'],
-    list: [
-      {
-        title: '创建者',
-        dataIndex: 'creator',
-      },
-      'createTime',
-    ],
+    list: ['creator', 'createTime'],
     remark: 'remark',
   },
 };
