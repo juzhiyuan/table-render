@@ -135,7 +135,7 @@ const Demo = () => {
         <Search schema={schema} />
         <ProTable
           columns={columns}
-          headerTitle="高级表单"
+          // headerTitle="高级表单"
           rowKey="id"
           toolbarRender={() => [
             <Button key="show" onClick={showData}>

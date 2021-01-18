@@ -61,10 +61,8 @@ const ProTable = props => {
 
   const toolbarArray =
     typeof toolbarRender === 'function' ? toolbarRender() : [];
-  const showTableTop =
-    headerTitle ||
-    (toolbarRender && toolbarRender.length) ||
-    Array.isArray(searchApi);
+  const showTableTop = headerTitle || toolbarRender || Array.isArray(searchApi);
+  console.log(showTableTop);
   return (
     <div className="tr-table-wrapper">
       {
