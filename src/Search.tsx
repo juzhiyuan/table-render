@@ -4,7 +4,7 @@ import { Button } from 'antd';
 import SearchForm from 'form-render/lib/antd';
 
 const SearchBtn = ({ clearSearch }) => {
-  const { tableState = {}, refresh } = useTable();
+  const { tableState = {}, refresh }: any = useTable();
   const { loading } = tableState;
   return (
     <div className="flex justify-end w-100">
