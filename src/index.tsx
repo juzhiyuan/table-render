@@ -23,7 +23,7 @@ export interface rootState {
   tableSize?: string;
 }
 
-const useTableRoot = props => {
+const useTableRoot = (props: { searchApi: any; pageSize: any; params: any }) => {
   const [state, set] = useSet({
     loading: false,
     search: {}, // 选项data
@@ -40,7 +40,7 @@ const useTableRoot = props => {
 
   const { pagination, search, searchApi, tab: currentTab } = state;
 
-  const doSearch = params => {
+  const doSearch = (params: { current?: any; tab?: any; pageSize?: any }) => {
     const { current, pageSize, tab } = params || {};
     const _current = current || 1;
     const _pageSize = pageSize || 10;
@@ -63,7 +63,7 @@ const useTableRoot = props => {
       message.warning('searchApi 不是函数，检查 <TableContainer /> 的 props');
     }
 
-    function basicSearch(searchApi) {
+    function basicSearch(searchApi: (arg0: any) => any) {
       set({ loading: true });
       let _params = { ...search, ..._pagination };
       if (props.params && isObj(props.params)) {
@@ -90,7 +90,7 @@ const useTableRoot = props => {
     }
   };
 
-  const refresh = params => {
+  const refresh = (params: { tab: any; stay?: any }) => {
     const _stay = (params && params.stay) || false;
     const _tab = params && params.tab;
     doSearch({
@@ -100,7 +100,7 @@ const useTableRoot = props => {
     });
   };
 
-  const changeTab = tab => {
+  const changeTab = (tab: any) => {
     if (['string', 'number'].indexOf(typeof tab) > -1) {
       set({ tab });
       refresh({ tab });
@@ -119,7 +119,7 @@ const useTableRoot = props => {
   return context;
 };
 
-const Container = (props, ref) => {
+const Container = (props: any, ref: ((instance: unknown) => void) | React.RefObject<unknown> | null | undefined) => {
   const context = useTableRoot(props);
 
   useImperativeHandle(ref, () => context);

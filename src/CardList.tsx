@@ -144,7 +144,7 @@ const listRender = (card, content) => {
 };
 
 const TableTitle = ({ title }) => {
-  const { tableState, setTable, doSearch } = useTable();
+  const { tableState, setTable, doSearch }: any = useTable();
   const { tab, searchApi } = tableState;
   const _tab = tab || 0;
   const onTabChange = e => {

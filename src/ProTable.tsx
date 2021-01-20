@@ -8,7 +8,13 @@ import { renderDom } from './field';
 import ErrorBoundary from './components/ErrorBoundary';
 import ToolBar from './components/ToolBar';
 
-const ProTable = props => {
+const ProTable = (props: {
+  dataSource?: any;
+  pagination?: any;
+  headerTitle?: any;
+  toolbarRender?: any;
+  columns?: any;
+}) => {
   if (props.dataSource) {
     console.error(
       '设置table-render的数据请使用searchApi，具体使用可参考：https://form-render.github.io/table-render/guide/demo#%E5%9F%BA%E6%9C%AC-demo',
@@ -18,31 +24,31 @@ const ProTable = props => {
   const { dataSource, pagination, loading, searchApi, tableSize } = tableState;
   const rootRef = useRef<HTMLDivElement>(null); // ProTable组件的ref
 
-  const onPageChange = (page, pageSize) => {
+  const onPageChange = (page: any, pageSize: any) => {
     setTable({ pagination: { ...pagination, current: page, pageSize } });
     doSearch({ current: page, pageSize });
   };
 
   const { headerTitle, toolbarRender, columns } = props;
 
-  columns.map(item => {
+  columns.map((item: any) => {
     const result = item;
     // 用户在columns中自定义的render会覆盖tr的预设render
     if (result.render) return result;
 
     switch (result.valueType) {
       case 'date':
-        result.render = value => renderDom(getDate(value), result);
+        result.render = (value: any) => renderDom(getDate(value), result);
         break;
       case 'dateTime':
-        result.render = value => renderDom(getDateTime(value), result);
+        result.render = (value: any) => renderDom(getDateTime(value), result);
         break;
       case 'money':
-        result.render = value => renderDom(getMoneyType(value), result);
+        result.render = (value: any) => renderDom(getMoneyType(value), result);
         break;
       case 'text':
       default:
-        result.render = value => renderDom(value, result);
+        result.render = (value: any) => renderDom(value, result);
     }
     return result;
   });
@@ -106,11 +112,11 @@ const ProTable = props => {
 
 export default ProTable;
 
-const TableTitle = ({ title }) => {
+const TableTitle = ({ title }: any) => {
   const { tableState, setTable, doSearch }: any = useTable();
   const { tab, searchApi } = tableState;
   const _tab = tab || 0;
-  const onTabChange = e => {
+  const onTabChange = (e: any) => {
     const _tab = e.target.value;
     setTable({ tab: _tab });
     doSearch({ tab: _tab });

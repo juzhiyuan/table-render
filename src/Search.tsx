@@ -3,7 +3,7 @@ import { useTable } from './hooks';
 import { Button } from 'antd';
 import SearchForm from 'form-render/lib/antd';
 
-const SearchBtn = ({ clearSearch }) => {
+const SearchBtn = ({ clearSearch }: any) => {
   const { tableState = {}, refresh }: any = useTable();
   const { loading } = tableState;
   return (
@@ -21,19 +21,19 @@ const SearchBtn = ({ clearSearch }) => {
   );
 };
 
-const Search = props => {
+const Search = (props: any) => {
   const [formSchema, setSchema] = useState({});
   const { tableState, setTable, refresh }: any = useTable();
   const { search } = tableState;
   const _schema = props.schema || props.propsSchema;
   const modifiedSchema = useRef();
-  const sref = useRef(); // 搜索组件的ref
+  const sref = useRef(null); // 搜索组件的ref
 
-  const onChange = newSearch => {
+  const onChange = (newSearch: any) => {
     setTable({ search: newSearch });
   };
   // TODO: 重新检查一下这个逻辑
-  const calcWidth = schema => {
+  const calcWidth = (schema: { properties: { [s: string]: unknown } | ArrayLike<unknown> }) => {
     try {
       let width = 100;
       const wList = Object.values(schema.properties)
@@ -80,7 +80,7 @@ const Search = props => {
   };
 
   const clearSearch = () => {
-    sref.current && sref.current?.resetData({});
+    sref.current && sref.current.resetData({});
   };
 
   useEffect(() => {
