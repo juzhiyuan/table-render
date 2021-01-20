@@ -8,8 +8,20 @@ import { message, ConfigProvider } from 'antd';
 import { isObj } from './utils';
 import _get from 'lodash.get';
 import zhCN from 'antd/es/locale/zh_CN';
+import { TablePaginationConfig } from 'antd/lib/table';
+
 import 'antd/dist/antd.css'; // 需要配置一下babel-plugins
 import './index.css';
+
+export interface rootState {
+  loading: boolean;
+  search: any;
+  searchApi: any;
+  tab: number;
+  dataSource: any[];
+  pagination?: TablePaginationConfig;
+  tableSize?: string;
+}
 
 const useTableRoot = props => {
   const [state, set] = useSet({
@@ -23,6 +35,7 @@ const useTableRoot = props => {
       pageSize: props.pageSize || 10,
       total: 1,
     },
+    tableSize: 'default',
   });
 
   const { pagination, search, searchApi, tab: currentTab } = state;

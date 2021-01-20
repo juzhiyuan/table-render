@@ -40,9 +40,7 @@ const Search = props => {
         .filter(v => v['ui:hidden'] !== true)
         .map(v => v['ui:width']);
       const idx = wList.lastIndexOf(undefined);
-      const effectiveList = wList
-        .slice(idx + 1)
-        .map(item => Number(item.substring(0, item.length - 1)));
+      const effectiveList = wList.slice(idx + 1).map(item => Number(item.substring(0, item.length - 1)));
       const len = effectiveList.reduce((a, b) => {
         const sum = a + b;
         if (sum > 100) return Math.min(100, b);
@@ -62,8 +60,7 @@ const Search = props => {
 
   // 给schema里拼接一个buttons
   const modifySchema = () => {
-    const noDiff =
-      JSON.stringify(modifiedSchema.current) === JSON.stringify(_schema);
+    const noDiff = JSON.stringify(modifiedSchema.current) === JSON.stringify(_schema);
     if (_schema && _schema.properties) {
       if (formSchema && noDiff) return;
       try {
@@ -78,9 +75,7 @@ const Search = props => {
         console.error(error);
       }
     } else {
-      console.error(
-        'SearchForm 传入了非法的 schema，参考文档: https://x-render.gitee.io/form-render/config/schema',
-      );
+      console.error('SearchForm 传入了非法的 schema，参考文档: https://x-render.gitee.io/form-render/config/schema');
     }
   };
 
@@ -106,10 +101,7 @@ const Search = props => {
 
   if (props.hidden) return null;
 
-  const searchBtnArr =
-    typeof props.searchBtnRender === 'function'
-      ? props.searchBtnRender(refresh, clearSearch)
-      : [];
+  const searchBtnArr = typeof props.searchBtnRender === 'function' ? props.searchBtnRender(refresh, clearSearch) : [];
 
   return (
     <div
