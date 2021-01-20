@@ -23,7 +23,7 @@ const SearchBtn = ({ clearSearch }) => {
 
 const Search = props => {
   const [formSchema, setSchema] = useState({});
-  const { tableState, setTable, refresh } = useTable();
+  const { tableState, setTable, refresh }: any = useTable();
   const { search } = tableState;
   const _schema = props.schema || props.propsSchema;
   const modifiedSchema = useRef();
@@ -80,7 +80,7 @@ const Search = props => {
   };
 
   const clearSearch = () => {
-    sref.current && sref.current.resetData({});
+    sref.current && sref.current?.resetData({});
   };
 
   useEffect(() => {
