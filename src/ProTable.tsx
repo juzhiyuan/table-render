@@ -12,7 +12,14 @@ import ToolBar from './components/ToolBar';
 
 import { ProTableProps } from './typing';
 
-const ProTable = (props: ProTableProps) => {
+const ProTable = (props: {
+  dataSource?: any;
+  pagination?: any;
+  headerTitle?: any;
+  toolbarRender?: any;
+  columns?: any;
+  toolbarAction?: any;
+}) => {
   if (props.dataSource) {
     console.error(
       '设置table-render的数据请使用searchApi，具体使用可参考：https://form-render.github.io/table-render/guide/demo#%E5%9F%BA%E6%9C%AC-demo',

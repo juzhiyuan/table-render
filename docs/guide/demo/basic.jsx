@@ -124,7 +124,7 @@ const Demo = () => {
   return (
     <div style={{ background: 'rgb(245,245,245)' }}>
       <TableContainer ref={tableRef} searchApi={searchApi}>
-        <Search schema={schema} hidden />
+        <Search schema={schema} />
         <ProTable
           columns={columns}
           // headerTitle="高级表单"
