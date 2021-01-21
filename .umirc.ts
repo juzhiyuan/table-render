@@ -19,8 +19,7 @@ export default defineConfig({
     },
     {
       title: '更新日志',
-      path:
-        'https://github.com/form-render/table-render/blob/master/CHANGELOG.md',
+      path: 'https://github.com/form-render/table-render/blob/master/CHANGELOG.md',
     },
   ],
   mode: 'site',

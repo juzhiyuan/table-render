@@ -139,6 +139,7 @@ const Demo = () => {
               创建
             </Button>,
           ]}
+          toolbarAction={false}
         />
       </TableContainer>
     </div>

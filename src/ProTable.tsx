@@ -1,20 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { ReactNode, useRef } from 'react';
 
 import { useTable } from './hooks';
 import { Table, Radio, Space } from 'antd';
+import { ColumnsType } from 'antd/lib/table';
+
 import { getDate, getDateTime, getMoneyType } from './utils';
 import { renderDom } from './field';
 
 import ErrorBoundary from './components/ErrorBoundary';
 import ToolBar from './components/ToolBar';
 
-const ProTable = (props: {
-  dataSource?: any;
-  pagination?: any;
-  headerTitle?: any;
-  toolbarRender?: any;
-  columns?: any;
-}) => {
+import { ProTableProps } from './typing';
+
+const ProTable = (props: ProTableProps) => {
   if (props.dataSource) {
     console.error(
       '设置table-render的数据请使用searchApi，具体使用可参考：https://form-render.github.io/table-render/guide/demo#%E5%9F%BA%E6%9C%AC-demo',
@@ -29,7 +27,7 @@ const ProTable = (props: {
     doSearch({ current: page, pageSize });
   };
 
-  const { headerTitle, toolbarRender, columns } = props;
+  const { headerTitle, toolbarRender, columns, toolbarAction = true } = props;
 
   columns.map((item: any) => {
     const result = item;
@@ -99,7 +97,7 @@ const ProTable = (props: {
                       return <div key={idx.toString()}>{ui}</div>;
                     })}
                 </Space>
-                <ToolBar fullScreen={fullScreen} />
+                {toolbarAction && <ToolBar fullScreen={fullScreen} />}
               </Space>
             </div>
           </div>

@@ -80,7 +80,7 @@ const Search = (props: any) => {
   };
 
   const clearSearch = () => {
-    sref.current && sref.current.resetData({});
+    sref.current?.resetData({});
   };
 
   useEffect(() => {
@@ -105,7 +105,8 @@ const Search = (props: any) => {
 
   return (
     <div
-      className="tr-search"
+      className={`tr-search ${props.searchClassName}`}
+      style={props.searchStyle}
       onKeyDown={e => {
         if (e.keyCode === 13) {
           refresh();
