@@ -1,10 +1,16 @@
-### 0.3.0
+### 0.5.0
+
+- [+] 新增 `toolbarAction` 属性，用于控制 刷新、密度调整、全屏展示等功能 是否展示
+- [+] 新增 `searchStyle`、`searchClassName` 属性，用于覆盖 Search 组件的样式
+- [+] 组件添加 typescript 声明文件，支持语法提示
+
+### 0.4.0
 
 - [+] toolBar 新增刷新、密度调整、全屏展示等功能
 
 ### 0.3.0
 
-- [!] 修复 `toolBarRender` 渲染异常的 bug
+- [!] 修复 `toolbarRender` 渲染异常的 bug
 
 ### 0.2.0
 
