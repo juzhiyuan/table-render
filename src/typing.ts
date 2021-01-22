@@ -1,10 +1,12 @@
-import { ColumnsType, TablePaginationConfig } from 'antd/lib/table';
+import { ColumnsType, TablePaginationConfig, TableProps } from 'antd/lib/table';
 
 export interface ProTableProps {
-  columns: ColumnsType;
   headerTitle?: string | React.ReactNode;
   toolbarRender?: () => React.ReactNode[];
   toolbarAction?: boolean;
   dataSource?: any;
-  pagination?: TablePaginationConfig;
+  pagination?: any;
+  style?: any;
+  className?: string;
+  columns?: ColumnsType;
 }

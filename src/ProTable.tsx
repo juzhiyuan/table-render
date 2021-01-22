@@ -2,24 +2,17 @@ import React, { ReactNode, useRef } from 'react';
 
 import { useTable } from './hooks';
 import { Table, Radio, Space } from 'antd';
-import { ColumnsType } from 'antd/lib/table';
+import { ColumnsType, TablePaginationConfig } from 'antd/lib/table';
 
 import { getDate, getDateTime, getMoneyType } from './utils';
 import { renderDom } from './field';
 
 import ErrorBoundary from './components/ErrorBoundary';
-import ToolBar from './components/ToolBar';
+import ToolBarAction from './components/ToolBarAction';
 
 import { ProTableProps } from './typing';
 
-const ProTable = (props: {
-  dataSource?: any;
-  pagination?: any;
-  headerTitle?: any;
-  toolbarRender?: any;
-  columns?: any;
-  toolbarAction?: any;
-}) => {
+const ProTable = (props: ProTableProps) => {
   if (props.dataSource) {
     console.error(
       '设置table-render的数据请使用searchApi，具体使用可参考：https://form-render.github.io/table-render/guide/demo#%E5%9F%BA%E6%9C%AC-demo',
@@ -34,7 +27,7 @@ const ProTable = (props: {
     doSearch({ current: page, pageSize });
   };
 
-  const { headerTitle, toolbarRender, columns, toolbarAction = true } = props;
+  const { headerTitle, toolbarRender, columns, style = {}, className = '', toolbarAction = false } = props;
 
   columns.map((item: any) => {
     const result = item;
@@ -77,7 +70,7 @@ const ProTable = (props: {
   };
 
   const toolbarArray = typeof toolbarRender === 'function' ? toolbarRender() : [];
-  const showTableTop = headerTitle || toolbarRender || Array.isArray(searchApi);
+  const showTableTop = headerTitle || (toolbarArray && toolbarArray.length) || Array.isArray(searchApi);
 
   const fullScreen = () => {
     return Promise.resolve(rootRef.current?.requestFullscreen());
@@ -85,7 +78,7 @@ const ProTable = (props: {
 
   return (
     <ErrorBoundary>
-      <div className="tr-table-wrapper" ref={rootRef}>
+      <div className={`tr-table-wrapper ${className}`} style={style} ref={rootRef}>
         {
           <div className={showTableTop ? 'tr-table-top' : 'tr-table-top-nohead'}>
             <div className="tr-table-title">
@@ -104,7 +97,7 @@ const ProTable = (props: {
                       return <div key={idx.toString()}>{ui}</div>;
                     })}
                 </Space>
-                {toolbarAction && <ToolBar fullScreen={fullScreen} />}
+                {toolbarAction && <ToolBarAction fullScreen={fullScreen} />}
               </Space>
             </div>
           </div>
