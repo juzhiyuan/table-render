@@ -1,7 +1,7 @@
 export default {
-  cjs: { type: 'babel', lazy: true },
+  cjs: { type: 'rollup' },
   esm: {
-    type: 'babel',
+    type: 'rollup',
     importLibToEs: true,
   },
   extraBabelPlugins: [
