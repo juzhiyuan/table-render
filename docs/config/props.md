@@ -122,6 +122,18 @@ ProTable 是 table-render 的表格渲染组件
 />
 ```
 
+### toolbarAction
+
+- 类型：`boolean`
+- 默认值：false
+- 必填：No
+
+1. 显示在表格主体右上方的 Icon 列表，内置了`刷新、调整密度、全屏显示` 等功能
+
+```js
+<ProTable toolbarAction />
+```
+
 ### columns
 
 columns 为 antd 已有的 props，所以支持 antd 所有的支持的 [columns](https://ant.design/components/table-cn/#Column) 的配置，但是我们也提供了一些更方便的 api，加快书写:
