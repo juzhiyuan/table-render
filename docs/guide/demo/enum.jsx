@@ -1,11 +1,7 @@
 import React, { useRef } from 'react';
 import { ProTable, Search, TableContainer, useTable } from 'table-render';
 import { Tag, Space, Menu, Dropdown, message, Button, Tooltip } from 'antd';
-import {
-  PlusOutlined,
-  EllipsisOutlined,
-  InfoCircleOutlined,
-} from '@ant-design/icons';
+import { PlusOutlined, EllipsisOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import request from 'umi-request';
 
 // 可以使用schema编辑器配置 https://form-render.github.io/schema-generator/
@@ -85,16 +81,11 @@ const Demo = () => {
   const searchApi = params => {
     console.log('params:', params);
     return request
-      .get(
-        'https://www.fastmock.site/mock/62ab96ff94bc013592db1f67667e9c76/getTableList/api/basic',
-        { params },
-      )
+      .get('https://www.fastmock.site/mock/62ab96ff94bc013592db1f67667e9c76/getTableList/api/basic', { params })
       .then(res => {
         console.log('response:', res);
         if (res && res.data) {
-          const data = res.data.map(item =>
-            Object.assign(item, { money: 999999999.99 }),
-          );
+          const data = res.data.map(item => Object.assign(item, { money: 999999999.99 }));
           console.log('dataSource', data);
           return { rows: data, total: res.data.length }; // 注意一定要返回 rows 和 total
         }
@@ -122,9 +113,11 @@ const Demo = () => {
             <Button key="show" onClick={showData}>
               查看日志
             </Button>,
-            <Button key="out">导出数据</Button>,
+            <Button key="out" onClick={() => alert('table-render！')}>
+              导出数据
+            </Button>,
             <Customize />,
-            <Button key="primary" type="primary">
+            <Button key="primary" type="primary" onClick={() => alert('table-render！')}>
               <PlusOutlined />
               创建
             </Button>,

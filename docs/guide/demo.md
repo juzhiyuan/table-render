@@ -35,6 +35,10 @@ toc: menu
 
 <code src='./demo/card.jsx' />
 
+## 使用 toolbarAction
+
+<code src='./demo/toolbarAction.jsx' />
+
 ## 不使用 searchForm
 
 <code src='./demo/nosearch.jsx' />

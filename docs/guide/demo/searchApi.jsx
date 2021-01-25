@@ -38,11 +38,7 @@ const columns = [
   {
     title: '操作',
     render: row => (
-      <a
-        href="https://x-render.gitee.io/form-render/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a href="https://x-render.gitee.io/form-render/" target="_blank" rel="noopener noreferrer">
         查看
       </a>
     ),
@@ -97,26 +93,30 @@ const searchApi = [
 ];
 
 const Demo = () => {
-  const tableRef = useRef();
+  const { changeTab } = useTable();
   return (
     <div style={{ background: 'rgb(245,245,245)' }}>
-      <TableContainer ref={tableRef} searchApi={searchApi}>
-        <Search schema={schema} />
-        <ProTable headerTitle="最简表格" columns={columns} rowKey="id" />
-        <Tester />
-      </TableContainer>
+      <Search schema={schema} />
+      <ProTable
+        headerTitle="最简表格"
+        columns={columns}
+        rowKey="id"
+        toolbarRender={() => [
+          <Button type="primary" onClick={() => changeTab(1)}>
+            切换到全部
+          </Button>,
+        ]}
+      />
     </div>
   );
 };
 
-export default Demo;
-
-const Tester = () => {
-  const { changeTab } = useTable();
-
-  const switchToAll = () => {
-    changeTab(1);
-  };
-
-  return <button onClick={switchToAll}>切换到全部</button>;
+const Wrapper = () => {
+  return (
+    <TableContainer searchApi={searchApi}>
+      <Demo />
+    </TableContainer>
+  );
 };
+
+export default Wrapper;

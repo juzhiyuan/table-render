@@ -37,8 +37,8 @@ const Search = (props: any) => {
     try {
       let width = 100;
       const wList = Object.values(schema.properties)
-        .filter(v => v['ui:hidden'] !== true)
-        .map(v => v['ui:width']);
+        .filter((v: any) => v['ui:hidden'] !== true)
+        .map((v: any) => v['ui:width']);
       const idx = wList.lastIndexOf(undefined);
       const effectiveList = wList.slice(idx + 1).map(item => Number(item.substring(0, item.length - 1)));
       const len = effectiveList.reduce((a, b) => {

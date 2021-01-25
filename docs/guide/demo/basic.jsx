@@ -133,8 +133,10 @@ const Demo = () => {
             <Button key="show" onClick={showData}>
               查看日志
             </Button>,
-            <Button key="out">导出数据</Button>,
-            <Button key="primary" type="primary">
+            <Button key="out" onClick={showData}>
+              导出数据
+            </Button>,
+            <Button key="primary" type="primary" onClick={() => alert('table-render！')}>
               <PlusOutlined />
               创建
             </Button>,
