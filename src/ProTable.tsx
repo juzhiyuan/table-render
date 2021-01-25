@@ -27,7 +27,14 @@ const ProTable = (props: ProTableProps) => {
     doSearch({ current: page, pageSize });
   };
 
-  const { headerTitle, toolbarRender, columns, style = {}, className = '', toolbarAction = false } = props;
+  const {
+    headerTitle,
+    toolbarRender,
+    columns,
+    style = {},
+    className = '',
+    toolbarAction = false,
+  } = props;
 
   columns.map((item: any) => {
     const result = item;
@@ -70,7 +77,8 @@ const ProTable = (props: ProTableProps) => {
   };
 
   const toolbarArray = typeof toolbarRender === 'function' ? toolbarRender() : [];
-  const showTableTop = headerTitle || (toolbarArray && toolbarArray.length) || Array.isArray(searchApi);
+  const showTableTop =
+    headerTitle || (toolbarArray && toolbarArray.length) || Array.isArray(searchApi);
 
   const fullScreen = () => {
     return Promise.resolve(rootRef.current?.requestFullscreen());

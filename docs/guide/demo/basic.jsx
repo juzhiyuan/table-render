@@ -73,7 +73,12 @@ const columns = [
             链路
           </div>
         </a>
-        <a href="https://x-render.gitee.io/form-render/" target="_blank" rel="noopener noreferrer" key="2">
+        <a
+          href="https://x-render.gitee.io/form-render/"
+          target="_blank"
+          rel="noopener noreferrer"
+          key="2"
+        >
           查看
         </a>
         <Dropdown key="3" overlay={menu} placement="bottomLeft" arrow>
@@ -103,7 +108,10 @@ const Demo = () => {
   const searchApi = params => {
     console.log('params:', params);
     return request
-      .get('https://www.fastmock.site/mock/62ab96ff94bc013592db1f67667e9c76/getTableList/api/basic', { params })
+      .get(
+        'https://www.fastmock.site/mock/62ab96ff94bc013592db1f67667e9c76/getTableList/api/basic',
+        { params },
+      )
       .then(res => {
         console.log('response:', res);
         if (res && res.data) {
