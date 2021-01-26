@@ -40,7 +40,9 @@ const Search = (props: any) => {
         .filter((v: any) => v['ui:hidden'] !== true)
         .map((v: any) => v['ui:width']);
       const idx = wList.lastIndexOf(undefined);
-      const effectiveList = wList.slice(idx + 1).map(item => Number(item.substring(0, item.length - 1)));
+      const effectiveList = wList
+        .slice(idx + 1)
+        .map(item => Number(item.substring(0, item.length - 1)));
       const len = effectiveList.reduce((a, b) => {
         const sum = a + b;
         if (sum > 100) return Math.min(100, b);
@@ -75,7 +77,9 @@ const Search = (props: any) => {
         console.error(error);
       }
     } else {
-      console.error('SearchForm 传入了非法的 schema，参考文档: https://x-render.gitee.io/form-render/config/schema');
+      console.error(
+        'SearchForm 传入了非法的 schema，参考文档: https://x-render.gitee.io/form-render/config/schema',
+      );
     }
   };
 
@@ -101,12 +105,13 @@ const Search = (props: any) => {
 
   if (props.hidden) return null;
 
-  const searchBtnArr = typeof props.searchBtnRender === 'function' ? props.searchBtnRender(refresh, clearSearch) : [];
+  const searchBtnArr =
+    typeof props.searchBtnRender === 'function' ? props.searchBtnRender(refresh, clearSearch) : [];
 
   return (
     <div
-      className={`tr-search ${props.searchClassName}`}
-      style={props.searchStyle}
+      className={`tr-search ${props.className}`}
+      style={props.style}
       onKeyDown={e => {
         if (e.keyCode === 13) {
           refresh();

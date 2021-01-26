@@ -90,7 +90,7 @@ const useTableRoot = (props: { searchApi: any; pageSize: any; params: any }) => 
     }
   };
 
-  const refresh = (params: { tab: any; stay?: any }) => {
+  const refresh = (params: { tab: string | number; stay?: any }) => {
     const _stay = (params && params.stay) || false;
     const _tab = params && params.tab;
     doSearch({
@@ -100,7 +100,7 @@ const useTableRoot = (props: { searchApi: any; pageSize: any; params: any }) => 
     });
   };
 
-  const changeTab = (tab: any) => {
+  const changeTab = (tab: string | number) => {
     if (['string', 'number'].indexOf(typeof tab) > -1) {
       set({ tab });
       refresh({ tab });
@@ -119,7 +119,10 @@ const useTableRoot = (props: { searchApi: any; pageSize: any; params: any }) => 
   return context;
 };
 
-const Container = (props: any, ref: ((instance: unknown) => void) | React.RefObject<unknown> | null | undefined) => {
+const Container = (
+  props: any,
+  ref: ((instance: unknown) => void) | React.RefObject<unknown> | null | undefined,
+) => {
   const context = useTableRoot(props);
 
   useImperativeHandle(ref, () => context);
