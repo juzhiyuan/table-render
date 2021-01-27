@@ -1,4 +1,4 @@
-import React, { ReactNode, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { useTable } from './hooks';
 import { Table, Radio, Space } from 'antd';
