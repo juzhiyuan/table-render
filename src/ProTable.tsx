@@ -51,6 +51,9 @@ const ProTable = (props: ProTableProps) => {
       case 'money':
         result.render = (value: any) => renderDom(getMoneyType(value), result);
         break;
+      case 'code':
+        result.render = (value: any) => renderDom(value, result);
+        break;
       case 'text':
       default:
         result.render = (value: any) => renderDom(value, result);

@@ -55,6 +55,11 @@ const columns = [
     ),
   },
   {
+    title: '代码',
+    dataIndex: 'code',
+    valueType: 'code',
+  },
+  {
     title: '创建时间',
     key: 'since',
     dataIndex: 'created_at',
