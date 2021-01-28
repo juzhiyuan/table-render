@@ -10,3 +10,5 @@ export interface ProTableProps {
   className?: string;
   columns?: ColumnsType;
 }
+
+export interface CardListProps {}

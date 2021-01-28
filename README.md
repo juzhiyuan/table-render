@@ -1,5 +1,7 @@
 # Table Render - 中后台表格解决方案
 
+[![npm version](https://badge.fury.io/js/table-render.svg)](https://www.npmjs.com/package/table-render) [![license](https://badgen.net/npm/license/table-render)](./LICENSE)
+
 ## 简介
 
 1. [文档地址](https://form-render.github.io/table-render/)
@@ -60,11 +62,7 @@ const columns = [
   {
     title: '操作',
     render: row => (
-      <a
-        href="https://x-render.gitee.io/form-render/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a href="https://x-render.gitee.io/form-render/" target="_blank" rel="noopener noreferrer">
         查看
       </a>
     ),

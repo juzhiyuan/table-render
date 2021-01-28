@@ -78,7 +78,7 @@ const Search = (props: any) => {
       }
     } else {
       console.error(
-        'SearchForm 传入了非法的 schema，参考文档: https://x-render.gitee.io/form-render/config/schema',
+        'SearchForm 传入了不正确的 schema，参考文档: https://x-render.gitee.io/form-render/config/schema',
       );
     }
   };

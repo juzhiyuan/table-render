@@ -38,11 +38,7 @@ const columns = [
   {
     title: '操作',
     render: row => (
-      <a
-        href="https://x-render.gitee.io/form-render/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a href="https://x-render.gitee.io/form-render/" target="_blank" rel="noopener noreferrer">
         查看
       </a>
     ),
@@ -67,7 +63,9 @@ const searchApi = params => {
 const cardRenderOptions = {
   type: 'default',
   header: {
-    title: 'title',
+    title: (
+      <img src="https://img.alicdn.com/imgextra/i3/O1CN01D3mXTL24PvCswyGhX_!!6000000007384-2-tps-411-273.png"></img>
+    ),
     extra: (card, index) => (
       <a
         onClick={e => {
