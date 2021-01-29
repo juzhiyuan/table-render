@@ -74,7 +74,11 @@ const CardList = props => {
                 >
                   <Meta
                     title={header && header.title && card[header.title.dataIndex || header.title]}
-                    description={content && content.description}
+                    description={
+                      (content && content.description && card[content.description]) || (
+                        <div style={{ height: 22 }} />
+                      )
+                    }
                   />
                   {content && content.list && renderList(card, content.list)}
                   {content && content.remark && (
