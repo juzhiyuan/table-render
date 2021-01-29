@@ -1,12 +1,12 @@
 {
   "name": "table-render",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "description": "中后台表格解决方案",
   "scripts": {
     "start": "dumi dev",
     "site": "dumi build",
     "build": "father-build",
-    "analyze":"ANALYZE=1 dumi dev",
+    "analyze": "ANALYZE=1 dumi dev",
     "predeploy": "npm run site",
     "deploy": "gh-pages -d docs-dist",
     "prepare": "npm run build",
