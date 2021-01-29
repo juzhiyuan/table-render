@@ -27,7 +27,7 @@ const CardList = props => {
     console.error('请根据文档填入正确的contentRender');
   }
 
-  const { header, content, footer } = cardRender;
+  const { type, cover, header, content, footer } = cardRender;
 
   const toolbarArray = typeof toolbarRender === 'function' ? toolbarRender() : [];
   const showTableTop = headerTitle || toolbarRender || Array.isArray(searchApi);
@@ -62,20 +62,21 @@ const CardList = props => {
             {dataSource.map((card, index) => (
               <Col key={index.toString()} span={6} className="card-render">
                 <Card
-                  hoverable={true}
+                  hoverable={props.hoverable || true}
                   style={{
                     width: card.width || '100%',
                     display: 'inline-block',
                   }}
                   onClick={() => onCardClick(card, index)}
-                  extra={header && header.extra && header.extra(card, index)}
+                  extra={!cover ? header && header.extra && header.extra(card, index) : null}
                   actions={footer && footer(card, index)}
+                  cover={cover && renderCover(cover, card)}
                 >
                   <Meta
-                    title={card[header.title.dataIndex || header.title]}
+                    title={header && header.title && card[header.title.dataIndex || header.title]}
                     description={content && content.description}
                   />
-                  {content && content.list && listRender(card, content.list)}
+                  {content && content.list && renderList(card, content.list)}
                   {content && content.remark && (
                     <Typography.Paragraph
                       style={{
@@ -100,6 +101,7 @@ const CardList = props => {
             size={paginationOptions.size || 'default'}
             style={{ textAlign: 'right' }}
             total={pagination.total}
+            onChange={onPageChange}
           />
         )}
       </div>
@@ -109,7 +111,8 @@ const CardList = props => {
 
 export default CardList;
 
-const listRender = (card, content) => {
+// content渲染逻辑
+const renderList = (card, content) => {
   return content.map((item, idx) => {
     if (item.render && typeof item.render === 'function') {
       return (
@@ -141,6 +144,12 @@ const listRender = (card, content) => {
       </div>
     );
   });
+};
+
+// 封面渲染逻辑
+const renderCover = (cover, card): React.ReactNode => {
+  if (typeof cover === 'string') return <img src={card[cover]} />;
+  return <img style={{ width: cover.width, height: cover.height }} src={card[cover.dataIndex]} />;
 };
 
 const TableTitle = ({ title }) => {

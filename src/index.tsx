@@ -23,7 +23,7 @@ export interface rootState {
   tableSize?: string;
 }
 
-const useTableRoot = (props: { searchApi: any; pageSize: any; params: any }) => {
+const useTableRoot = (props: { searchApi: any; pageSize: number; params: any }) => {
   const [state, set] = useSet({
     loading: false,
     search: {}, // 选项data
@@ -73,6 +73,7 @@ const useTableRoot = (props: { searchApi: any; pageSize: any; params: any }) => 
         .then(res => {
           // TODO：这里校验res是否规范
           const { rows, total, pageSize } = res;
+          console.log(res);
           set({
             loading: false,
             dataSource: rows,
@@ -120,7 +121,7 @@ const useTableRoot = (props: { searchApi: any; pageSize: any; params: any }) => 
 };
 
 const Container = (
-  props: any,
+  props: { searchApi: any; pageSize: number; params: any },
   ref: ((instance: unknown) => void) | React.RefObject<unknown> | null | undefined,
 ) => {
   const context = useTableRoot(props);

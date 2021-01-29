@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { CardList, Search, TableContainer, useTable } from 'table-render';
+import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
 import request from 'umi-request';
 
 // 可以使用schema编辑器配置 https://form-render.github.io/schema-generator/
@@ -60,27 +61,48 @@ const searchApi = params => {
     .catch(e => console.log('Oops, error', e));
 };
 
+// const cardRenderOptions = {
+//   type: 'default',
+//   header: {
+//     title: 'title',
+//     extra: (card, index) => (
+//       <a
+//         onClick={e => {
+//           e.stopPropagation();
+//         }}
+//       >
+//         action
+//       </a>
+//     ),
+//   },
+//   content: {
+//     description: 'description',
+//     list: ['creator', 'createTime'],
+//     remark: 'remark',
+//   },
+// };
+
 const cardRenderOptions = {
-  type: 'default',
+  type: 'image',
+  cover: 'imgUrl',
+  // cover: {
+  //   dataIndex: 'imgUrl',
+  //   width: 100,
+  //   height: 100
+  // },
   header: {
-    title: (
-      <img src="https://img.alicdn.com/imgextra/i3/O1CN01D3mXTL24PvCswyGhX_!!6000000007384-2-tps-411-273.png"></img>
-    ),
-    extra: (card, index) => (
-      <a
-        onClick={e => {
-          e.stopPropagation();
-        }}
-      >
-        action
-      </a>
-    ),
+    title: 'title',
   },
   content: {
     description: 'description',
     list: ['creator', 'createTime'],
-    remark: 'remark',
+    // remark: 'remark',
   },
+  footer: (card, idx) => [
+    <SettingOutlined key="setting" />,
+    <EditOutlined key="edit" />,
+    <EllipsisOutlined key="ellipsis" />,
+  ],
 };
 
 const Demo = () => {
@@ -90,9 +112,9 @@ const Demo = () => {
       <TableContainer ref={tableRef} searchApi={searchApi}>
         <Search schema={schema} />
         <CardList
-          onCardClick={(item, idx) => alert(JSON.stringify(item))}
+          // onCardClick={(item, idx) => alert(JSON.stringify(item))}
           cardRender={cardRenderOptions}
-          paginationOptions={{ size: 'default' }}
+          paginationOptions={{ size: 'small' }}
         />
       </TableContainer>
     </div>

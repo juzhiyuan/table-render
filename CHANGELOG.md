@@ -9,7 +9,7 @@
 ### 0.5.0
 
 - [+] 新增 `toolbarAction` 属性，用于控制 刷新、密度调整、全屏展示等功能 是否展示
-- [+] 新增 `searchStyle`、`searchClassName` 属性，用于覆盖 Search 组件的样式
+- [+] 新增 `style`、`className` 属性，用于覆盖 Search、ProTable 组件的样式
 - [+] 组件添加 typescript 声明文件，支持语法提示
 
 ### 0.4.0
