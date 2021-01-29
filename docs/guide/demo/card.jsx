@@ -95,8 +95,18 @@ const cardRenderOptions = {
   },
   content: {
     description: 'description',
-    list: ['creator', 'createTime'],
-    // remark: 'remark',
+    // list: ['creator', 'createTime'],
+    list: [
+      {
+        title: '创建人',
+        render: card => card.creator,
+      },
+      {
+        title: '创建时间',
+        dataIndex: 'createTime',
+      },
+    ],
+    remark: 'remark',
   },
   footer: (card, idx) => [
     <SettingOutlined key="setting" />,

@@ -122,7 +122,7 @@ const renderList = (card, content) => {
               <span>{item.title}</span>:
             </Col>
             <Col>
-              <span>{item.render(item, idx)}</span>
+              <span>{item.render(card, idx)}</span>
             </Col>
           </Row>
         </div>
