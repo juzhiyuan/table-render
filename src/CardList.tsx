@@ -117,8 +117,8 @@ const renderList = (card, content) => {
     if (item.render && typeof item.render === 'function') {
       return (
         <div key={idx.toString()} style={{ marginTop: 8 }}>
-          <Row>
-            <Col span={6}>
+          <Row gutter={6}>
+            <Col>
               <span>{item.title}</span>:
             </Col>
             <Col>
@@ -131,9 +131,9 @@ const renderList = (card, content) => {
 
     return (
       <div key={idx.toString()} style={{ marginTop: 8 }}>
-        <Row>
+        <Row gutter={6}>
           {item.title && (
-            <Col span={6}>
+            <Col>
               <span>{item.title}</span>:
             </Col>
           )}
