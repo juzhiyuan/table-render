@@ -1,8 +1,6 @@
 # Table Render - 中后台表格解决方案
 
 
-## npm-version and license
-
 [![npm version](https://badge.fury.io/js/table-render.svg)](https://www.npmjs.com/package/table-render) [![license](https://badgen.net/npm/license/table-render)](./LICENSE)
 
 ## Stargazers over time
