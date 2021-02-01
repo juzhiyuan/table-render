@@ -13,7 +13,7 @@ import { TablePaginationConfig } from 'antd/lib/table';
 import 'antd/dist/antd.css'; // 需要配置一下babel-plugins
 import './index.css';
 
-export interface rootState {
+export interface RootState {
   loading: boolean;
   search: any;
   searchApi: any;
@@ -23,7 +23,13 @@ export interface rootState {
   tableSize?: string;
 }
 
-const useTableRoot = (props: { searchApi: any; pageSize: number; params: any }) => {
+export interface RootProps {
+  searchApi: () => Promise<any>;
+  pageSize?: number;
+  params?: any;
+}
+
+const useTableRoot = (props: RootProps) => {
   const [state, set] = useSet({
     loading: false,
     search: {}, // 选项data
@@ -121,8 +127,8 @@ const useTableRoot = (props: { searchApi: any; pageSize: number; params: any }) 
 };
 
 const Container = (
-  props: { searchApi: any; pageSize: number; params: any },
-  ref: ((instance: unknown) => void) | React.RefObject<unknown> | null | undefined,
+  props: RootProps,
+  ref?: ((instance: unknown) => void) | React.RefObject<unknown> | null | undefined,
 ) => {
   const context = useTableRoot(props);
 
