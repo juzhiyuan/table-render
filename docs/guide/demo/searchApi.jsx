@@ -49,6 +49,7 @@ const searchApi = [
   {
     name: '我的数据',
     api: params => {
+      console.log('我的数据', params);
       return {
         rows: [
           {
@@ -71,6 +72,7 @@ const searchApi = [
   {
     name: '全部数据',
     api: params => {
+      console.log('全部数据', params);
       return {
         rows: [
           {

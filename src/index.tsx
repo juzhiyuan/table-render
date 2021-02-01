@@ -17,7 +17,7 @@ export interface RootState {
   loading: boolean;
   search: any;
   searchApi: any;
-  tab: number;
+  tab: number | string;
   dataSource: any[];
   pagination?: TablePaginationConfig;
   tableSize?: string;
@@ -74,6 +74,10 @@ const useTableRoot = (props: RootProps) => {
       let _params = { ...search, ..._pagination };
       if (props.params && isObj(props.params)) {
         _params = { ..._params, ...props.params };
+      }
+      if (Array.isArray(props.searchApi)) {
+        console.log('searchApi is Array');
+        _params = { ..._params, tab };
       }
       Promise.resolve(searchApi(_params))
         .then(res => {

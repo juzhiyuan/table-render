@@ -47,6 +47,7 @@ const columns = [
 ];
 
 const searchApi = params => {
+  params.pageSize = 2;
   return request
     .get(
       'https://www.fastmock.site/mock/62ab96ff94bc013592db1f67667e9c76/getTableList/api/getCardList',
@@ -55,7 +56,7 @@ const searchApi = params => {
     .then(res => {
       console.log('response:', res);
       if (res && res.data) {
-        return { rows: res.data, total: res.data.length }; // 注意一定要返回 rows 和 total
+        return { rows: res.data, total: res.data.length, pageSize: res.data.pageSize || 2 }; // 注意一定要返回 rows 和 total
       }
     })
     .catch(e => console.log('Oops, error', e));
