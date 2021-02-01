@@ -1,3 +1,7 @@
+### 0.8.0
+
+- [+] `searchApi`为`Array`类型时, params 透出 tab
+
 ### 0.7.0
 
 - [+] 完善`CardList`组件的渲染逻辑
