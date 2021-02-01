@@ -62,7 +62,7 @@ const ProTable = (props: ProTableProps) => {
   });
   const tableProps = {
     ...props,
-    // 底下这些值全局控制，不准在使用ProTable时用props赋值
+    // dataSource不准在使用ProTable时用props赋值
     dataSource,
     pagination:
       props.pagination === false

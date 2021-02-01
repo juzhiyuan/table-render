@@ -104,6 +104,7 @@ const CardList = props => {
           <Pagination
             size={paginationOptions.size || 'default'}
             style={{ textAlign: 'right' }}
+            pageSize={pagination.pageSize}
             total={pagination.total}
             onChange={onPageChange}
           />
