@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { CardList, Search, TableContainer, useTable } from 'table-render';
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import { PlusOutlined, EllipsisOutlined, SettingOutlined, EditOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
 import request from 'umi-request';
 
 // 可以使用schema编辑器配置 https://form-render.github.io/schema-generator/
@@ -62,6 +63,17 @@ const searchApi = params => {
     .catch(e => console.log('Oops, error', e));
 };
 
+const searchArr = [
+  {
+    name: '我的数据',
+    api: searchApi,
+  },
+  {
+    name: '全部数据',
+    api: searchApi,
+  },
+];
+
 // const cardRenderOptions = {
 //   type: 'default',
 //   header: {
@@ -92,10 +104,10 @@ const cardRenderOptions = {
   //   height: 100
   // },
   header: {
-    title: 'title',
+    title: (card, index) => card.title,
   },
   content: {
-    description: 'description',
+    description: (card, index) => card.description,
     // list: ['creator', 'createTime'],
     list: [
       {
@@ -120,12 +132,19 @@ const Demo = () => {
   const tableRef = useRef();
   return (
     <div style={{ background: 'rgb(245,245,245)' }}>
-      <TableContainer ref={tableRef} searchApi={searchApi}>
+      <TableContainer ref={tableRef} searchApi={searchArr}>
         <Search schema={schema} />
         <CardList
           // onCardClick={(item, idx) => alert(JSON.stringify(item))}
           cardRender={cardRenderOptions}
           paginationOptions={{ size: 'small' }}
+          toolbarRender={() => [
+            <Button key="primary" type="primary" onClick={() => alert('table-render！')}>
+              <PlusOutlined />
+              创建
+            </Button>,
+          ]}
+          toolbarAction
         />
       </TableContainer>
     </div>

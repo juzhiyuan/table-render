@@ -24,7 +24,7 @@ const CardList = props => {
   const { headerTitle, toolbarRender, paginationOptions, onCardClick, cardRender } = props;
 
   if (!cardRender) {
-    console.error('请根据文档填入正确的contentRender');
+    console.error('请根据文档填入正确的cardRender');
   }
 
   const { type, cover, header, content, footer } = cardRender;
@@ -60,22 +60,25 @@ const CardList = props => {
         {dataSource.length ? (
           <div className="card-list">
             {dataSource.map((card, index) => (
-              <Col key={index.toString()} span={6} className="card-render">
+              <Col key={index.toString()} span={(24 / 8) * 2} className="card-render">
                 <Card
                   hoverable={props.hoverable || true}
                   style={{
                     width: card.width || '100%',
                     display: 'inline-block',
                   }}
+                  bodyStyle={{ padding: 12 }}
                   onClick={() => onCardClick(card, index)}
                   extra={!cover ? header && header.extra && header.extra(card, index) : null}
                   actions={footer && footer(card, index)}
                   cover={cover && renderCover(cover, card)}
                 >
                   <Meta
-                    title={header && header.title && card[header.title.dataIndex || header.title]}
+                    title={header && header.title && headerRender(header.title, card, index)}
                     description={
-                      (content && content.description && card[content.description]) || (
+                      (content &&
+                        content.description &&
+                        descriptionRender(content.description, card, index)) || (
                         <div style={{ height: 22 }} />
                       )
                     }
@@ -103,7 +106,7 @@ const CardList = props => {
         {!paginationOptions.hidden && (
           <Pagination
             size={paginationOptions.size || 'default'}
-            style={{ textAlign: 'right' }}
+            style={{ textAlign: 'right', padding: '16px 0' }}
             pageSize={pagination.pageSize}
             total={pagination.total}
             onChange={onPageChange}
@@ -121,7 +124,7 @@ const renderList = (card, content) => {
   return content.map((item, idx) => {
     if (item.render && typeof item.render === 'function') {
       return (
-        <div key={idx.toString()} style={{ marginTop: 8 }}>
+        <div key={idx.toString()} style={{ marginTop: 4 }}>
           <Row gutter={6}>
             <Col>
               <span>{item.title}</span>:
@@ -135,7 +138,7 @@ const renderList = (card, content) => {
     }
 
     return (
-      <div key={idx.toString()} style={{ marginTop: 8 }}>
+      <div key={idx.toString()} style={{ marginTop: 4 }}>
         <Row gutter={6}>
           {item.title && (
             <Col>
@@ -155,6 +158,21 @@ const renderList = (card, content) => {
 const renderCover = (cover, card): React.ReactNode => {
   if (typeof cover === 'string') return <img src={card[cover]} />;
   return <img style={{ width: cover.width, height: cover.height }} src={card[cover.dataIndex]} />;
+};
+
+// header渲染逻辑
+const headerRender = (title, card, index) => {
+  if (typeof title === 'function') {
+    return title(card, index);
+  }
+  return card[title.dataIndex || title];
+};
+// descript渲染逻辑
+const descriptionRender = (desc, card, index) => {
+  if (typeof desc === 'function') {
+    return desc(card, index);
+  }
+  return card[desc.dataIndex || desc];
 };
 
 const TableTitle = ({ title }) => {

@@ -1,6 +1,7 @@
 .card-list {
   display: flex;
   flex-flow: row wrap;
+  width: 100%;
 }
 .card-render{
   margin-bottom: 20px;
