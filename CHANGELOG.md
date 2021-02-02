@@ -1,3 +1,7 @@
+### 0.8.3
+
+- [+] `refresh`和`doSearch`支持传入第二个参数，用于覆盖 Search 组件的的`formData`
+
 ### 0.8.0
 
 - [+] `CardList`组件 `header`&`description`字段支持函数处理
