@@ -73,7 +73,7 @@ const CardList = props => {
                   style
                     ? style
                     : {
-                        width: card.width || 300,
+                        width: 310,
                         marginBottom: 20,
                       }
                 }

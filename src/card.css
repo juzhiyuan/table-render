@@ -6,8 +6,4 @@
 }
 .card-render {
   margin-bottom: 20px;
-  /* padding-right: 16px; */
-}
-.card-render:nth-child(4n){
-  /* padding-left: 0; */
 }
