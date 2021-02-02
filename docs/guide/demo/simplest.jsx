@@ -28,6 +28,7 @@ const columns = [
       open: '未解决',
       closed: '已解决',
     },
+    sorter: (a, b) => {},
   },
   {
     title: '创建时间',
@@ -47,7 +48,10 @@ const columns = [
 
 const searchApi = params => {
   return request
-    .get('https://www.fastmock.site/mock/62ab96ff94bc013592db1f67667e9c76/getTableList/api/simple', { params })
+    .get(
+      'https://www.fastmock.site/mock/62ab96ff94bc013592db1f67667e9c76/getTableList/api/simple',
+      { params },
+    )
     .then(res => {
       console.log('response:', res);
       if (res && res.data) {
@@ -63,7 +67,21 @@ const Demo = () => {
     <div style={{ background: 'rgb(245,245,245)' }}>
       <TableContainer ref={tableRef} searchApi={searchApi}>
         <Search schema={schema} />
-        <ProTable headerTitle="最简表格" columns={columns} rowKey="id" />
+        <ProTable
+          headerTitle="最简表格"
+          columns={columns}
+          rowKey="id"
+          onChange={(one, two, sorter) => {
+            const { setTable, tableState } = tableRef.current;
+            debugger;
+            setTable({
+              search: {
+                ...tableState,
+                sortType: sorter.order,
+              },
+            });
+          }}
+        />
       </TableContainer>
     </div>
   );

@@ -65,7 +65,7 @@ const CardList = props => {
         }
         {dataSource.length ? (
           <div className="card-list">
-            <Row gutter={16}>
+            <Row gutter={16} style={{ width: '100%' }}>
               {dataSource.map((card, index) => (
                 <Col key={index.toString()} span={6} className="card-render">
                   <Card

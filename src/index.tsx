@@ -46,7 +46,7 @@ const useTableRoot = (props: RootProps) => {
 
   const { pagination, search, searchApi, tab: currentTab } = state;
 
-  const doSearch = (params: { current?: any; tab?: any; pageSize?: any }) => {
+  const doSearch = (params: { current?: any; tab?: any; pageSize?: any }, customSearch?: any) => {
     const { current, pageSize, tab } = params || {};
     const _current = current || 1;
     const _pageSize = pageSize || 10;
@@ -71,7 +71,7 @@ const useTableRoot = (props: RootProps) => {
 
     function basicSearch(searchApi: (arg0: any) => any) {
       set({ loading: true });
-      let _params = { ...search, ..._pagination };
+      let _params = { ...search, ...customSearch, ..._pagination };
       if (props.params && isObj(props.params)) {
         _params = { ..._params, ...props.params };
       }
@@ -101,14 +101,18 @@ const useTableRoot = (props: RootProps) => {
     }
   };
 
-  const refresh = (params?: { tab: string | number; stay?: boolean }) => {
+  const refresh = (params?: { tab: string | number; stay?: boolean }, search?: any) => {
     const _stay = (params && params.stay) || false;
     const _tab = params && params.tab;
-    doSearch({
-      current: _stay ? pagination.current : 1,
-      tab: _tab,
-      pageSize: pagination.pageSize,
-    });
+    const _search = search || {};
+    doSearch(
+      {
+        current: _stay ? pagination.current : 1,
+        tab: _tab,
+        pageSize: pagination.pageSize,
+      },
+      _search,
+    );
   };
 
   const changeTab = (tab: string | number) => {
