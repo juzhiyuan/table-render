@@ -21,13 +21,19 @@ const CardList = props => {
     doSearch({ current: page, pageSize });
   };
 
-  const { headerTitle, toolbarRender, paginationOptions, onCardClick, cardRender } = props;
+  const {
+    headerTitle,
+    toolbarRender,
+    paginationOptions,
+    onCardClick = () => {},
+    cardRender,
+  } = props;
 
   if (!cardRender) {
     console.error('请根据文档填入正确的cardRender');
   }
 
-  const { type, cover, header, content, footer } = cardRender;
+  const { type, style, cover, header, content, footer } = cardRender;
 
   const toolbarArray = typeof toolbarRender === 'function' ? toolbarRender() : [];
   const showTableTop = headerTitle || toolbarRender || Array.isArray(searchApi);
@@ -60,44 +66,48 @@ const CardList = props => {
         {dataSource.length ? (
           <div className="card-list">
             {dataSource.map((card, index) => (
-              <Col key={index.toString()} span={(24 / 8) * 2} className="card-render">
-                <Card
-                  hoverable={props.hoverable || true}
-                  style={{
-                    width: card.width || '100%',
-                    display: 'inline-block',
-                  }}
-                  bodyStyle={{ padding: 12 }}
-                  onClick={() => onCardClick(card, index)}
-                  extra={!cover ? header && header.extra && header.extra(card, index) : null}
-                  actions={footer && footer(card, index)}
-                  cover={cover && renderCover(cover, card)}
-                >
-                  <Meta
-                    title={header && header.title && headerRender(header.title, card, index)}
-                    description={
-                      (content &&
-                        content.description &&
-                        descriptionRender(content.description, card, index)) || (
-                        <div style={{ height: 22 }} />
-                      )
-                    }
-                  />
-                  {content && content.list && renderList(card, content.list)}
-                  {content && content.remark && (
-                    <Typography.Paragraph
-                      style={{
-                        color: 'rgb(102, 102, 102)',
-                        marginTop: '8px',
-                        fontSize: 12,
-                      }}
-                      ellipsis={{ rows: 1 }}
-                    >
-                      {card[content.remark.dataIndex || content.remark]}
-                    </Typography.Paragraph>
-                  )}
-                </Card>
-              </Col>
+              // <Col key={index.toString()} span={6} className="card-render">
+              <Card
+                hoverable={props.hoverable || true}
+                style={
+                  style
+                    ? style
+                    : {
+                        width: card.width || 300,
+                        marginBottom: 20,
+                      }
+                }
+                // bodyStyle={{ padding: 12 }}
+                onClick={() => onCardClick(card, index)}
+                extra={!cover ? header && header.extra && header.extra(card, index) : null}
+                actions={footer && footer(card, index)}
+                cover={cover && renderCover(cover, card)}
+              >
+                <Meta
+                  title={header && header.title && headerRender(header.title, card, index)}
+                  description={
+                    (content &&
+                      content.description &&
+                      descriptionRender(content.description, card, index)) || (
+                      <div style={{ height: 22 }} />
+                    )
+                  }
+                />
+                {content && content.list && renderList(card, content.list)}
+                {content && content.remark && (
+                  <Typography.Paragraph
+                    style={{
+                      color: 'rgb(102, 102, 102)',
+                      marginTop: '8px',
+                      fontSize: 12,
+                    }}
+                    ellipsis={{ rows: 1 }}
+                  >
+                    {card[content.remark.dataIndex || content.remark]}
+                  </Typography.Paragraph>
+                )}
+              </Card>
+              // </Col>
             ))}
           </div>
         ) : (
