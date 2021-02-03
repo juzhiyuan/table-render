@@ -65,44 +65,44 @@ const CardList = props => {
         }
         {dataSource.length ? (
           <div className="card-list">
-            <Row gutter={16} style={{ width: '100%' }}>
-              {dataSource.map((card, index) => (
-                <Col key={index.toString()} span={6} className="card-render">
-                  <Card
-                    hoverable={props.hoverable || true}
-                    // bodyStyle={{ padding: 12 }}
-                    onClick={() => onCardClick(card, index)}
-                    extra={!cover ? header && header.extra && header.extra(card, index) : null}
-                    actions={footer && footer(card, index)}
-                    cover={cover && renderCover(cover, card)}
-                  >
-                    <Meta
-                      title={header && header.title && headerRender(header.title, card, index)}
-                      description={
-                        (content &&
-                          content.description &&
-                          descriptionRender(content.description, card, index)) || (
-                          <div style={{ height: 22 }} />
-                        )
-                      }
-                    />
-                    {content && content.list && renderList(card, content.list)}
-                    {content && content.remark && (
-                      <Typography.Paragraph
-                        style={{
-                          color: 'rgb(102, 102, 102)',
-                          marginTop: '8px',
-                          fontSize: 12,
-                        }}
-                        ellipsis={{ rows: 1 }}
-                      >
-                        {card[content.remark.dataIndex || content.remark]}
-                      </Typography.Paragraph>
-                    )}
-                  </Card>
-                </Col>
-              ))}
-            </Row>
+            {/* <Row gutter={16} style={{ width: '100%' }}> */}
+            {dataSource.map((card, index) => (
+              <Col key={index.toString()} span={6} className="card-render">
+                <Card
+                  hoverable={props.hoverable || true}
+                  // bodyStyle={{ padding: 12 }}
+                  onClick={() => onCardClick(card, index)}
+                  extra={!cover ? header && header.extra && header.extra(card, index) : null}
+                  actions={footer && footer(card, index)}
+                  cover={cover && renderCover(cover, card)}
+                >
+                  <Meta
+                    title={header && header.title && headerRender(header.title, card, index)}
+                    description={
+                      (content &&
+                        content.description &&
+                        descriptionRender(content.description, card, index)) || (
+                        <div style={{ height: 22 }} />
+                      )
+                    }
+                  />
+                  {content && content.list && renderList(card, content.list)}
+                  {content && content.remark && (
+                    <Typography.Paragraph
+                      style={{
+                        color: 'rgb(102, 102, 102)',
+                        marginTop: '8px',
+                        fontSize: 12,
+                      }}
+                      ellipsis={{ rows: 1 }}
+                    >
+                      {card[content.remark.dataIndex || content.remark]}
+                    </Typography.Paragraph>
+                  )}
+                </Card>
+              </Col>
+            ))}
+            {/* </Row> */}
           </div>
         ) : (
           <Empty />

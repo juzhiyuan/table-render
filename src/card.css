@@ -1,9 +1,10 @@
 .card-list {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
-  width: 100%;
+  margin: 0 -8px;
 }
 .card-render {
   margin-bottom: 20px;
+  padding-left: 8px;
+  padding-right: 8px;
 }
