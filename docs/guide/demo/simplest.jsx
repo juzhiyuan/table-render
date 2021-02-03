@@ -73,7 +73,6 @@ const Demo = () => {
           rowKey="id"
           onChange={(one, two, sorter) => {
             const { setTable, tableState } = tableRef.current;
-            debugger;
             setTable({
               search: {
                 ...tableState,

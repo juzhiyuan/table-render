@@ -56,10 +56,10 @@ const useTableRoot = (props: RootProps) => {
     }
     // console.log(params, { _current, _pageSize, _tab }, 'searchParams');
     const _pagination = { current: _current, pageSize: _pageSize };
-    if (typeof searchApi === 'function') {
-      basicSearch(searchApi);
-    } else if (Array.isArray(searchApi)) {
-      const _searchApi = _get(searchApi, `[${_tab}].api`);
+    if (typeof props.searchApi === 'function') {
+      basicSearch(props.searchApi);
+    } else if (Array.isArray(props.searchApi)) {
+      const _searchApi = _get(props.searchApi, `[${_tab}].api`);
       if (typeof _searchApi === 'function') {
         basicSearch(_searchApi);
       } else {
@@ -126,6 +126,12 @@ const useTableRoot = (props: RootProps) => {
 
   const context = {
     tableState: state,
+    // setTable: (newState: any, fn?: Function) => {
+    //   set(newState);
+    //   if (fn && typeof fn == 'function') {
+    //     fn(state, { ...state, ...newState });
+    //   }
+    // },
     setTable: set,
     doSearch,
     refresh,
