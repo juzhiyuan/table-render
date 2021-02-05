@@ -97,6 +97,15 @@ const Search = (props: any) => {
     refresh();
   };
 
+  const onValidate = valid => {
+    console.log(valid);
+    if (valid.length) {
+      setTable({
+        checkPassed: false,
+      });
+    }
+  };
+
   useEffect(() => {
     if (props.hidden) {
       onMount();
@@ -124,6 +133,7 @@ const Search = (props: any) => {
         schema={formSchema}
         formData={search}
         onChange={onChange}
+        onValidate={onValidate}
         onMount={onMount}
         displayType="row"
         widgets={{

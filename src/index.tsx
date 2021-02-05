@@ -42,11 +42,14 @@ const useTableRoot = (props: RootProps) => {
       total: 1,
     },
     tableSize: 'default',
+    checkPassed: true,
   });
 
-  const { pagination, search, searchApi, tab: currentTab } = state;
+  const { pagination, search, searchApi, tab: currentTab, checkPassed } = state;
 
   const doSearch = (params: { current?: any; tab?: any; pageSize?: any }, customSearch?: any) => {
+    console.log(checkPassed);
+    if (!checkPassed) return;
     const { current, pageSize, tab } = params || {};
     const _current = current || 1;
     const _pageSize = pageSize || 10;

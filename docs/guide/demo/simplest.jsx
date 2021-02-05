@@ -6,6 +6,15 @@ import request from 'umi-request';
 const schema = {
   type: 'object',
   properties: {
+    string: {
+      title: '标题',
+      type: 'string',
+      pattern: '^[A-Za-z0-9]+$',
+      message: {
+        pattern: '格式不对哦~',
+      },
+      'ui:width': '25%',
+    },
     created_at: {
       title: '创建时间',
       type: 'string',
