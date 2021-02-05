@@ -98,12 +98,15 @@ const Search = (props: any) => {
   };
 
   const onValidate = valid => {
-    console.log(valid);
     if (valid.length) {
       setTable({
         checkPassed: false,
       });
+      return;
     }
+    setTable({
+      checkPassed: true,
+    });
   };
 
   useEffect(() => {
